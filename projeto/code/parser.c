@@ -7,7 +7,7 @@
 
 void parse(char *input){
 
-	char *delims = "\t\n";
+	char *delims = " \t\n";
 	long a;
 	STACK s = createStack();
 
@@ -15,58 +15,58 @@ void parse(char *input){
 		char *resto;
 		a = strtol(token, &resto, 10);
 		if(strlen(resto) == 0){
-			s = PUSH(s, a);
-		}else if(strcmp(token, "+")){
+			PUSH(s, a);
+		}else if(strcmp(token, "+") == 0){
 			long x = TOP(s);
-			s = POP(s);
+			POP(s);
 			long y = TOP(s);
-			s = POP(s);
-			s = PUSH(s, x+y);
-		}else if(strcmp(token, "-")){
+			POP(s);
+			PUSH(s, x+y);
+		}else if(strcmp(token, "-") == 0){
 			long x = TOP(s);
-			s = POP(s);
+			POP(s);
 			long y = TOP(s);
-			s = POP(s);
- 			s = PUSH(s, x-y);
-		}else if(strcmp(token, "*")){
+			POP(s);
+ 			PUSH(s, x-y);
+		}else if(strcmp(token, "*") == 0){
 			long x = TOP(s);
-			s = POP(s);
+			POP(s);
 			long y = TOP(s);
-			s = POP(s);
-			s = PUSH(s, x*y);
-		}else if(strcmp(token, "/")){
+			POP(s);
+			PUSH(s, x*y);
+		}else if(strcmp(token, "/") == 0){
 			long x = TOP(s);
-			s = POP(s);
+			POP(s);
 			long y = TOP(s);
-			s = POP(s);
-			s = PUSH(s, x/y);
-		}else if(strcmp(token, "(")){
+			POP(s);
+			PUSH(s, x/y);
+		}else if(strcmp(token, "(") == 0){
 			long x = TOP(s);
-			s = POP(s);
-			s = PUSH(s, x--);
-		}else if(strcmp(token, ")")){
+			POP(s);
+			PUSH(s, x--);
+		}else if(strcmp(token, ") == 0")){
 			long x = TOP(s);
-			s = POP(s);
-			s = PUSH(s, x++);
-		}else if(strcmp(token, "%")){
+			POP(s);
+			PUSH(s, x++);
+		}else if(strcmp(token, "%") == 0){
 			long x = TOP(s);
-			s = POP(s);
+			POP(s);
 			long y = TOP(s);
-			s = POP(s);
-			s = PUSH(s, x%y);
-		}else if(strcmp(token, "#")){
+			POP(s);
+			PUSH(s, x%y);
+		}else if(strcmp(token, "#") == 0){
 			long x = TOP(s);
-			s = POP(s);
+			POP(s);
 			long y = TOP(s);
-			s = POP(s);
-			s = PUSH(s, pow(x,y));
-		}/*else if(strcmp(token, "&")){
+			POP(s);
+			PUSH(s, pow(x,y));
+		}/*else if(strcmp(token, "&") == 0){
 			PUSH(s, &);
-		}else if(strcmp(token, "|")){
+		}else if(strcmp(token, "|") == 0){
 
-		}else if(strcmp(token, "^")){
+		}else if(strcmp(token, "^") == 0){
 
-		}else if(strcmp(token, "~")){
+		}else if(strcmp(token, "~") == 0){
 
 		}*/
 	}

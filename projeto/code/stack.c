@@ -12,30 +12,16 @@ STACK createStack(){
 }
 
 
-STACK PUSH(STACK s, long n){
-	s.array[s.num] = n;
-	s.num++;
-	return s;
-}
-
-STACK POP(STACK s){
-	s.num--;
-	return s;
-}
-
 
 long TOP(STACK s){
 	long x;
-	x = s.array[s.num];
+	x = s.array[s.num - 1];
 	return x;
 }
 
 
 void printStack(STACK s){
-
-	int i;
-
-	for(i = 0; i < s.num; i++){
+	for(int i = 0; i < s.num; i++){
 		printf("%ld", s.array[i]);
 	}
 	printf("\n");

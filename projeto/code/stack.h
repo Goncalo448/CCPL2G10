@@ -3,8 +3,9 @@ typedef struct{
 	int num;
 }STACK;
 
+#define PUSH(s, n)	s.array[s.num++] = n
+#define POP(s)		s.array[--s.num]
+
 STACK createStack();
-STACK PUSH(STACK s, long n);
-STACK POP(STACK s);
 long TOP(STACK s);
 void printStack(STACK s);
