@@ -21,30 +21,31 @@ void parse(char *input){
 			POP(s);
 			long y = TOP(s);
 			POP(s);
-			PUSH(s, x+y);
+			PUSH(s, y+x);
 		}else if(strcmp(token, "-") == 0){
 			long x = TOP(s);
 			POP(s);
 			long y = TOP(s);
 			POP(s);
- 			PUSH(s, x-y);
+ 			PUSH(s, y-x);
 		}else if(strcmp(token, "*") == 0){
 			long x = TOP(s);
 			POP(s);
 			long y = TOP(s);
 			POP(s);
-			PUSH(s, x*y);
+			PUSH(s, y*x);
 		}else if(strcmp(token, "/") == 0){
 			long x = TOP(s);
 			POP(s);
 			long y = TOP(s);
 			POP(s);
-			PUSH(s, x/y);
+			PUSH(s, y/x);
 		}else if(strcmp(token, "(") == 0){
 			long x = TOP(s);
+			x = x - 1;
 			POP(s);
-			PUSH(s, x--);
-		}else if(strcmp(token, ") == 0")){
+			PUSH(s, x);
+		}else if(strcmp(token, ")" == 0)){
 			long x = TOP(s);
 			POP(s);
 			PUSH(s, x++);
@@ -53,22 +54,36 @@ void parse(char *input){
 			POP(s);
 			long y = TOP(s);
 			POP(s);
-			PUSH(s, x%y);
+			PUSH(s, y%x);
 		}else if(strcmp(token, "#") == 0){
 			long x = TOP(s);
 			POP(s);
 			long y = TOP(s);
 			POP(s);
-			PUSH(s, pow(x,y));
-		}/*else if(strcmp(token, "&") == 0){
-			PUSH(s, &);
+			PUSH(s, pow(y,x));
+		}else if(strcmp(token, "&") == 0){
+			long x = TOP(s);
+			POP(s);
+			long y = TOP(s);
+			POP(s);
+			PUSH(s, y&x);
 		}else if(strcmp(token, "|") == 0){
-
+			long x = TOP(s);
+			POP(s);
+			long y = TOP(s);
+			POP(s);
+			PUSH(s, y|x);
 		}else if(strcmp(token, "^") == 0){
-
+			long x = TOP(s);
+			POP(s);
+			long y = TOP(s);
+			POP(s);
+			PUSH(s, y^x);
 		}else if(strcmp(token, "~") == 0){
-
-		}*/
+			long x = TOP(s);
+			POP(s);
+			PUSH(s, ~x);
+		}
 	}
 
 	printStack(s);
