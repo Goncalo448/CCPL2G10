@@ -1,9 +1,21 @@
+/**
+ * @file Ficheiro principal
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
 #include "parser.h"
 #include "stack.h"
+
+/**
+ * \brief Esta é a função principal do programa.
+ *
+ * Descrição detalhada:
+ * Aplica a função parse ao input.
+ *
+ * @returns O valor 0
+ */
 
 int main(){
 

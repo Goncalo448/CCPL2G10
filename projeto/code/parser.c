@@ -1,9 +1,20 @@
+/**
+ * @file Função que diz respeito ao parser
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "parser.h"
 #include "stack.h"
+
+/**
+ * \brief Esta função faz o parse do input.
+ *
+ * @param line O input que foi lido ao qual vai ser aplicado o parse.
+ * 
+ * 
+ */
 
 void parse(char *input){
 
@@ -42,13 +53,14 @@ void parse(char *input){
 			PUSH(s, y/x);
 		}else if(strcmp(token, "(") == 0){
 			long x = TOP(s);
-			x = x - 1;
+			x--;
 			POP(s);
 			PUSH(s, x);
-		}else if(strcmp(token, ")" == 0)){
+		}else if(strcmp(token, ")") == 0){
 			long x = TOP(s);
+			x++;
 			POP(s);
-			PUSH(s, x++);
+			PUSH(s, x);
 		}else if(strcmp(token, "%") == 0){
 			long x = TOP(s);
 			POP(s);
