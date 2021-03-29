@@ -20,7 +20,7 @@ void parse(char *input){
 
 	char *delims = " \t\n";
 	long a;
-	STACK s = createStack();
+	STACK s = *createStack();
 
 	for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)){
 		char *resto;

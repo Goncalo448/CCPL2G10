@@ -28,3 +28,5 @@ int main(){
 
 	return 0;
 }
+
+//gcc -std=gnu11 -Wall -Wextra -pedantic-errors -O *.c -lm
