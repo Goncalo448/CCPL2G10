@@ -28,20 +28,18 @@ int hasType(DATA x, int mask){
 }
 
 
-STACK PUSH(STACK *s, DATA x){
+void PUSH(STACK *s, DATA x){
 	if(s->size == s->num){
 		s->size += 50;
 		s->array = (DATA *) realloc(s->array, s->size * sizeof(DATA));
 	}
 	s->array[s->num] = x;
 	s->num += 1;
-
-	return s->array[s->num];
 }
 
 
-STACK POP(STACK *s){
-	return s->array[s->num--];
+void POP(STACK *s){
+	s->array[s->num--];
 }
 
 
@@ -52,6 +50,10 @@ STACK POP(STACK *s){
 DATA TOP(STACK *s){
 	return  s->array[s->num];
 }
+
+
+//DATA convertType(STACK *s, char a, )
+
 
 /**
  * \brief Esta função imprime a STACK.

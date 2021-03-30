@@ -2,7 +2,7 @@
  * @file Library STACK
  */
 
-typedef enum{LONG = 1, DOUBLE = 2, CHAR = 4, STRING = 8} TYPE;
+typedef enum {LONG = 1, DOUBLE = 2, CHAR = 4, STRING = 8} TYPE;
 
 
 typedef struct data{
@@ -34,9 +34,19 @@ STACK *createStack();
 /**
  * \brief Função que pega o valor que está no topo da STACK.
  */
-long TOP(STACK s);
+DATA TOP(STACK *s);
+
+
+void PUSH(STACK *s, DATA x);
+
+
+void POP(STACK *s);
+
+
+int hasType(DATA x, int mask);
+
 
 /**
  * \brief Função que imprime a STACK
  */
-void printStack(STACK s);
+void printStack(STACK *s);
