@@ -20,8 +20,8 @@ void parse(char *input)
 {
 
 	char *delims = " \t\n";
-	long a;
-	STACK s = *createStack();
+	DATA a;
+	STACK *s = createStack();
 
 	for (char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
 	{
@@ -77,7 +77,7 @@ void parse(char *input)
 			POP(s);
 			PUSH(s, x);
 		}
-		else if (strcmp(token, "%") == 0)
+		else if (strcmp(token, '%') == 0)
 		{
 			DATA x = TOP(s);
 			POP(s);
@@ -89,9 +89,13 @@ void parse(char *input)
 		{
 			DATA x = TOP(s);
 			POP(s);
+			x = (double)x;
 			DATA y = TOP(s);
 			POP(s);
-			PUSH(s, pow(y, x));
+			y = (double)y;
+			double k = pow(x, y);
+			k = (DATA)k;
+			PUSH(s, k);
 		}
 		else if (strcmp(token, "&") == 0)
 		{
@@ -143,9 +147,43 @@ void parse(char *input)
 			k = (float)k;
 			PUSH(s, k);
 		}
-		else if (strcmp(token, "f") == 0)
+		else if (strcmp(token, ";") == 0)
 		{
+			POP(s);
 		}
+		else if (strcmp(token, "\\") == 0)
+		{
+			DATA x = TOP(s);
+			POP(s);
+			DATA y = TOP(s);
+			POP(s);
+			PUSH(s, x);
+			PUSH(s, y);
+		}
+		else if (strcmp(token, "@") == 0)
+		{
+			DATA x = TOP(s);
+			POP(s);
+			DATA y = TOP(s);
+			POP(s);
+			DATA z = TOP(s);
+			POP(s);
+			PUSH(s, y);
+			PUSH(s, x);
+			PUSH(s, z); 
+		}
+		else if (strcmp(token, "$") == 0)
+		{
+			DATA n = TOP(s); // n é a posição que vamos buscar
+			POP(s);
+			n = (int)n;
+			while (n-1 > 0){
+				POP(s);
+				n--;
+			}
+
+		}
+		
 
 		printStack(s);
 	}
