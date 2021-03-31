@@ -2,29 +2,33 @@
  * @file Library STACK
  */
 
-typedef enum {LONG = 1, DOUBLE = 2, CHAR = 4, STRING = 8} TYPE;
+typedef enum
+{
+	LONG = 1,
+	DOUBLE = 2,
+	CHAR = 4,
+	STRING = 8
+} TYPE;
 
-
-typedef struct data{
+typedef struct data
+{
 	TYPE type;
 	long LONG;
 	double DOUBLE;
 	char CHAR;
 	char *STRING;
-}DATA;
+} DATA;
 
-
-typedef struct stack{
+typedef struct stack
+{
 	DATA *array;
 	int size;
 	int num;
-}STACK;
+} STACK;
 
-
-#define INTEGER  (LONG | CHAR)
+#define INTEGER (LONG | CHAR)
 
 #define NUMBER (INTEGER | DOUBLE)
-
 
 /**
  * \brief Função que cria uma STACK.
@@ -36,15 +40,11 @@ STACK *createStack();
  */
 DATA TOP(STACK *s);
 
-
 void PUSH(STACK *s, DATA x);
-
 
 void POP(STACK *s);
 
-
 int hasType(DATA x, int mask);
-
 
 /**
  * \brief Função que imprime a STACK
