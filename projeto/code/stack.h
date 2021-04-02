@@ -2,6 +2,11 @@
  * @file Library STACK
  */
 
+
+#ifndef __STACK_H__
+#define __STACK_H__
+
+ 
 typedef enum
 {
 	LONG = 1,
@@ -9,6 +14,7 @@ typedef enum
 	CHAR = 4,
 	STRING = 8
 } TYPE;
+
 
 typedef struct data
 {
@@ -19,12 +25,14 @@ typedef struct data
 	char *STRING;
 } DATA;
 
+
 typedef struct stack
 {
 	DATA *array;
 	int size;
 	int num;
 } STACK;
+
 
 #define INTEGER (LONG | CHAR)
 
@@ -50,3 +58,15 @@ int hasType(DATA x, int mask);
  * \brief Função que imprime a STACK
  */
 void printStack(STACK *s);
+
+
+#define STACK_OPERATION_PROTO(_type, _name)  \
+	void PUSH_##_name(STACK *s, _type val);  \
+	_type POP_##_name(STACK *s);
+
+STACK_OPERATION_PROTO(long, LONG)
+STACK_OPERATION_PROTO(double, DOUBLE)
+STACK_OPERATION_PROTO(char, CHAR)
+STACK_OPERATION_PROTO(char *, STRING)
+
+#endif

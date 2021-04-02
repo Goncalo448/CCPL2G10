@@ -7,7 +7,7 @@
 #include <string.h>
 #include "parser.h"
 #include "stack.h"
-
+ 
 /**
  * \brief Esta é a função principal do programa.
  *

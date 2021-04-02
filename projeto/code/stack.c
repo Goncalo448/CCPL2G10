@@ -12,7 +12,7 @@
  *
  * @returns Retorna uma STACK
  */
-
+ 
 STACK *createStack()
 {
 	STACK *s = (STACK *)malloc(sizeof(STACK));
@@ -23,10 +23,12 @@ STACK *createStack()
 	return s;
 }
 
+
 int hasType(DATA x, int mask)
 {
 	return (x.type & mask) != 0;
 }
+
 
 void PUSH(STACK *s, DATA x)
 {
@@ -53,7 +55,11 @@ DATA TOP(STACK *s)
 	return s->array[s->num];
 }
 
-//DATA convertType(STACK *s, char a, )
+
+int isEmpty(STACK *s){
+
+	return s->num == 0;
+}
 
 /**
  * \brief Esta função imprime a STACK.
@@ -83,3 +89,23 @@ void printStack(STACK *s)
 	}
 	printf("\n");
 }
+
+
+#define STACK_OPERATION(_type, _name)        \
+	void PUSH_##_name(STACK *s, _type val){  \
+		DATA elemento;                       \
+		elemento.type = _name;               \
+		elemento._name = val;                \
+		PUSH(s, elemento);                   \
+	}                                        \
+	_type POP_##_name(STACK *s){             \
+		DATA elemento = POP(s);              \
+		assert(elemento.type == _name);      \
+		return elemento._name;               \
+	}
+
+
+STACK_OPERATION(long, LONG)
+STACK_OPERATION(double, DOUBLE)
+STACK_OPERATION(char, CHAR)
+STACK_OPERATION(char *, STRING)

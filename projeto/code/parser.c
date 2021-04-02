@@ -20,7 +20,7 @@ void parse(char *input)
 {
 
 	char *delims = " \t\n";
-	DATA a;
+	long a;
 	STACK *s = createStack();
 
 	for (char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
@@ -33,11 +33,51 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "+") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y + x);
+			if(hasType(TOP(s), NUMBER)){
+				if(hasType(TOP(s), INTEGER)){
+					if(hasType(TOP(s), LONG)){
+						long x = TOP(s);
+						POP(s);
+					}else{
+						char x = TOP(s);
+						POP(s);
+					}
+				}else{
+					double x = TOP(s);
+					POP(s);
+				}
+			}else{
+				break;
+			}
+			if(hasType(TOP(s), NUMBER)){
+				if(hasType(TOP(s), INTEGER)){
+					if(hasType(TOP(s), LONG)){
+						long y = TOP(s);
+						POP(s);
+					}else{
+						char y = TOP(s);
+						POP(s);
+					}
+				}else{
+					double y = TOP(s);
+					POP(s);
+				}
+			}else{
+				break;
+			}
+			if(hasType(x+y, NUMBER)){
+				if(hasType(x+y, INTEGER)){
+					if(hasType(x+y, LONG)){
+						PUSH_LONG(s, x+y);
+					}else{
+						PUSH_CHAR(s, x+y);
+					}
+				}else{
+					PUSH_DOUBLE(s, x+y);
+				}
+			}else{
+				break;
+			}
 		}
 		else if (strcmp(token, "-") == 0)
 		{
@@ -45,7 +85,13 @@ void parse(char *input)
 			POP(s);
 			DATA y = TOP(s);
 			POP(s);
-			PUSH(s, y - x);
+			if(hasType(x+y, LONG)){
+				PUSH_LONG(s, x+y);
+			}else if(hasType(z, DOUBLE)){
+				PUSH_DOUBLE(s, x+y);
+			}else{
+				printf("Invalid operation\n");
+			}
 		}
 		else if (strcmp(token, "*") == 0)
 		{
@@ -87,15 +133,15 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "#") == 0)
 		{
-			DATA x = TOP(s);
+			double x.DOUBLE = TOP(s);
 			POP(s);
-			x = (double)x;
+			double a = (double)x;
 			DATA y = TOP(s);
 			POP(s);
-			y = (double)y;
-			double k = pow(x, y);
-			k = (DATA)k;
-			PUSH(s, k);
+			double b = (double)y;
+			double k = pow(a, b);
+			x = (DATA)k;
+			PUSH(s, x);
 		}
 		else if (strcmp(token, "&") == 0)
 		{
@@ -183,7 +229,6 @@ void parse(char *input)
 			}
 
 		}
-		
-
-		printStack(s);
 	}
+	printStack(s);
+}
