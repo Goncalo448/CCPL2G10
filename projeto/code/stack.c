@@ -98,8 +98,8 @@ void printStack(STACK *s)
 		elemento._name = val;                \
 		PUSH(s, elemento);                   \
 	}                                        \
-	_type POP_##_name(STACK *s){             \
-		DATA elemento = POP(s);              \
+	_type TOP_##_name(STACK *s){             \
+		DATA elemento = TOP(s);              \
 		assert(elemento.type == _name);      \
 		return elemento._name;               \
 	}

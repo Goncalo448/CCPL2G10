@@ -16,6 +16,10 @@ typedef enum
 } TYPE;
 
 
+#define INTEGER (LONG | CHAR)
+#define NUMBER (INTEGER | DOUBLE)
+
+
 typedef struct data
 {
 	TYPE type;
@@ -34,10 +38,6 @@ typedef struct stack
 } STACK;
 
 
-#define INTEGER (LONG | CHAR)
-
-#define NUMBER (INTEGER | DOUBLE)
-
 /**
  * \brief Função que cria uma STACK.
  */
@@ -54,6 +54,8 @@ void POP(STACK *s);
 
 int hasType(DATA x, int mask);
 
+int isEmpty(STACK *s);
+
 /**
  * \brief Função que imprime a STACK
  */
@@ -62,7 +64,7 @@ void printStack(STACK *s);
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
-	_type POP_##_name(STACK *s);
+	_type TOP_##_name(STACK *s);
 
 STACK_OPERATION_PROTO(long, LONG)
 STACK_OPERATION_PROTO(double, DOUBLE)

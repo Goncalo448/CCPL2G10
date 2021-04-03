@@ -29,68 +29,62 @@ void parse(char *input)
 		a = strtol(token, &resto, 10);
 		if (strlen(resto) == 0)
 		{
-			PUSH(s, a);
+			PUSH_LONG(s, a);
 		}
 		else if (strcmp(token, "+") == 0)
 		{
-			if(hasType(TOP(s), NUMBER)){
-				if(hasType(TOP(s), INTEGER)){
-					if(hasType(TOP(s), LONG)){
-						long x = TOP(s);
-						POP(s);
-					}else{
-						char x = TOP(s);
-						POP(s);
-					}
-				}else{
-					double x = TOP(s);
-					POP(s);
-				}
+			if(hasType(TOP(s), LONG)){
+				long x = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = TOP_DOUBLE(s);
+				POP(s);
 			}else{
+				printf("Operação inválida\n");
 				break;
 			}
-			if(hasType(TOP(s), NUMBER)){
-				if(hasType(TOP(s), INTEGER)){
-					if(hasType(TOP(s), LONG)){
-						long y = TOP(s);
-						POP(s);
-					}else{
-						char y = TOP(s);
-						POP(s);
-					}
-				}else{
-					double y = TOP(s);
-					POP(s);
-				}
+			if(hasType(TOP(s), LONG)){
+				long y = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double y = TOP_DOUBLE(s);
+				POP(s);
 			}else{
+				printf("Operação inválida\n");
 				break;
 			}
-			if(hasType(x+y, NUMBER)){
-				if(hasType(x+y, INTEGER)){
-					if(hasType(x+y, LONG)){
-						PUSH_LONG(s, x+y);
-					}else{
-						PUSH_CHAR(s, x+y);
-					}
-				}else{
-					PUSH_DOUBLE(s, x+y);
-				}
+			if(hasType(x+y, LONG)){
+				PUSH_LONG(s, x+y);
 			}else{
-				break;
+				PUSH_DOUBLE(s, x+y);
 			}
 		}
 		else if (strcmp(token, "-") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			if(hasType(x+y, LONG)){
-				PUSH_LONG(s, x+y);
-			}else if(hasType(z, DOUBLE)){
-				PUSH_DOUBLE(s, x+y);
+			if(hasType(TOP(s), LONG)){
+				long x = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = TOP_DOUBLE(s);
+				POP(s);
 			}else{
-				printf("Invalid operation\n");
+				printf("Operação inválida\n");
+				break;
+			}
+			if(hasType(TOP(s), LONG)){
+				long y = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double y = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+			if(hasType(y-x, LONG)){
+				PUSH_LONG(s, y-x);
+			}else{
+				PUSH_DOUBLE(s, y-x);
 			}
 		}
 		else if (strcmp(token, "*") == 0)
