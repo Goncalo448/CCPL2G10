@@ -89,41 +89,139 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "*") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y * x);
+			if(hasType(TOP(s), LONG)){
+				long x = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+
+			if(hasType(TOP(s), LONG)){
+				long y = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double y = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+
+			if(hasType(x*y, LONG)){
+				PUSH_LONG(s, x*y);
+			}else{
+				PUSH_DOUBLE(s, x*y);
+			}
 		}
 		else if (strcmp(token, "/") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y / x);
+			if(hasType(TOP(s), LONG)){
+				long x = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+			
+			if(hasType(TOP(s), LONG)){
+				long y = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double y = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+
+			if(hasType(y/x, LONG)){
+				PUSH_LONG(s, y/x);
+			}else{
+				PUSH_DOUBLE(s, y/x);
+			}
 		}
 		else if (strcmp(token, "(") == 0)
 		{
-			DATA x = TOP(s);
-			x--;
-			POP(s);
-			PUSH(s, x);
+			if(hasType(TOP(s), INTEGER)){
+				if(hasType(TOP(s), LONG)){
+					long x = TOP_LONG(s);
+					POP(s);
+				}else{
+					char x = TOP_CHAR(s);
+					POP(s);
+				}
+			}else{
+				double x = TOP_DOUBLE(s);
+				POP(s);
+			}
+
+			if(hasType(x--, LONG)){
+				PUSH_LONG(s, x--);
+			}else if(hasType(x--, CHAR)){
+				PUSH_CHAR(s, x--);
+			}else{
+				PUSH_DOUBLE(s, x--);
+			}
 		}
 		else if (strcmp(token, ")") == 0)
 		{
-			DATA x = TOP(s);
-			x++;
-			POP(s);
-			PUSH(s, x);
+			if(hasType(TOP(s), INTEGER)){
+				if(hasType(TOP(s), LONG)){
+					long x = TOP_LONG(s);
+					POP(s);
+				}else{
+					char x = TOP_CHAR(s);
+					POP(s);
+				}
+			}else{
+				double x = TOP_DOUBLE(s);
+				POP(s);
+			}
+
+			if(hasType(x++, LONG)){
+				PUSH_LONG(s, x++);
+			}else if(hasType(x++, CHAR)){
+				PUSH_CHAR(s, x++);
+			}else{
+				PUSH_DOUBLE(s, x++);
+			}
 		}
 		else if (strcmp(token, '%') == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y % x);
+			if(hasType(TOP(s), LONG)){
+				long x = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+			
+			if(hasType(TOP(s), LONG)){
+				long y = TOP_LONG(s);
+				POP(s);
+			}else if(hasType(TOP(s), DOUBLE)){
+				double y = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Operação inválida\n");
+				break;
+			}
+
+			if(hasType(y%x, LONG)){
+				PUSH_LONG(s, y%x);
+			}else{
+				PUSH_DOUBLE(s, y%x);
+			}
 		}
 		else if (strcmp(token, "#") == 0)
 		{
