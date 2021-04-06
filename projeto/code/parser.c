@@ -43,6 +43,7 @@ void parse(char *input)
 				printf("Operação inválida\n");
 				break;
 			}
+
 			if(hasType(TOP(s), LONG)){
 				long y = TOP_LONG(s);
 				POP(s);
@@ -53,10 +54,11 @@ void parse(char *input)
 				printf("Operação inválida\n");
 				break;
 			}
-			if(hasType(x+y, LONG)){
-				PUSH_LONG(s, x+y);
+
+			if(hasType(y+x, LONG)){
+				PUSH_LONG(s, y+x);
 			}else{
-				PUSH_DOUBLE(s, x+y);
+				PUSH_DOUBLE(s, y+x);
 			}
 		}
 		else if (strcmp(token, "-") == 0)
@@ -312,14 +314,20 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "$") == 0)
 		{
-			DATA n = TOP(s); // n é a posição que vamos buscar
-			POP(s);
-			n = (int)n;
-			while (n-1 > 0){
+			if(hasType(TOP(s), LONG)){
+				long n = TOP_LONG(s);
 				POP(s);
-				n--;
+			}else if(hasType(TOP(s), DOUBLE)){
+				double n = TOP_DOUBLE(s);
+				POP(s);
+			}else{
+				printf("Tipo inválido\n");
+				break;
 			}
 
+			while(n > 0){
+				
+			}
 		}
 	}
 	printStack(s);
