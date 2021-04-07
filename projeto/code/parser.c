@@ -251,7 +251,7 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "&") == 0)
 		{
-			if (hasType (TOP (s), NUMBER)){
+			if (hasType (TOP (s), INTEGER)){
 				if (hasType (TOP (s), LONG)){
 					long x = TOP_LONG (s);
 					POP (s);
@@ -264,7 +264,7 @@ void parse(char *input)
 				POP (s);
 			}
 
-			if (hasType (TOP (s), NUMBER)){
+			if (hasType (TOP (s), INTEGER)){
 				if (hasType (TOP (s), LONG)){
 					long y = TOP_LONG (s);
 					POP (s);
@@ -280,7 +280,7 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "|") == 0)
 		{
-			if (hasType (TOP (s), NUMBER)){
+			if (hasType (TOP (s), INTEGER)){
 				if (hasType (TOP (s), LONG)){
 					long x = TOP_LONG (s);
 					POP (s);
@@ -293,7 +293,7 @@ void parse(char *input)
 				POP (s);
 			}
 
-			if (hasType (TOP (s), NUMBER)){
+			if (hasType (TOP (s), INTEGER)){
 				if (hasType (TOP (s), LONG)){
 					long y = TOP_LONG (s);
 					POP (s);
@@ -309,7 +309,7 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "^") == 0)
 		{
-			if (hasType (TOP (s), NUMBER)){
+			if (hasType (TOP (s), INTEGER)){
 				if (hasType (TOP (s), LONG)){
 					long x = TOP_LONG (s);
 					POP (s);
@@ -322,7 +322,7 @@ void parse(char *input)
 				POP (s);
 			}
 
-			if (hasType (TOP (s), NUMBER)){
+			if (hasType (TOP (s), INTEGER)){
 				if (hasType (TOP (s), LONG)){
 					long y = TOP_LONG (s);
 					POP (s);
@@ -338,29 +338,76 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "~") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			PUSH(s, ~x);
+			if(hasType (TOP (s), INTEGER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP (s); 
+				} else {
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+			PUSH_LONG (s, ~x);
 		}
 		else if (strcmp(token, "l") == 0)
 		{
 			char p[50];
 			fgets(p, 50, stdin);
-			PUSH(s, p);
+			PUSH_STRING (s, p);
 		}
 		else if (strcmp(token, "i") == 0)
 		{
-			DATA k = TOP(s);
-			POP(s);
-			k = (int)k;
-			PUSH(s, k);
+			if (hasType (TOP (s), INTEGER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP(s);
+				} else {
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+			long y = x;
+			PUSH_LONG (s, y);
 		}
 		else if (strcmp(token, "f") == 0)
 		{
-			DATA k = TOP(s);
-			POP(s);
-			k = (float)k;
-			PUSH(s, k);
+			if (hasType (TOP (s), INTEGER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP(s);
+				} else {
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+			double y = x;
+			PUSH_LONG (s, y);
+		} 
+		else if (strcmp(token, "c") == 0)
+		{
+			if (hasType (TOP (s), INTEGER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP(s);
+				} else {
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+			char y = x;
+			PUSH_LONG (s, y);
 		}
 		else if (strcmp(token, ";") == 0)
 		{
