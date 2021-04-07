@@ -227,39 +227,114 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "#") == 0)
 		{
-			double x.DOUBLE = TOP(s);
-			POP(s);
-			double a = (double)x;
-			DATA y = TOP(s);
-			POP(s);
-			double b = (double)y;
-			double k = pow(a, b);
-			x = (DATA)k;
-			PUSH(s, x);
+			if (hasType (TOP (s), LONG)){
+				long x = TOP_LONG (s);
+				POP (s);
+			} else if (hasType (TOP (s), DOUBLE)){
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			} else {
+				printf ("Operação inválida\n");
+				break;
+			}
+			if (hasType (TOP (s), LONG)){
+				long y = TOP_LONG (s);
+				POP (s);
+			} else if (hasType (TOP (s), DOUBLE)){
+				double y = TOP_DOUBLE (s);
+				POP (s);
+			} else {
+				printf ("Operação inválida\n");
+				break;
+			}
+			PUSH_DOUBLE (s, pow (x,y));
 		}
 		else if (strcmp(token, "&") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y & x);
+			if (hasType (TOP (s), NUMBER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP (s);
+				} else{
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+
+			if (hasType (TOP (s), NUMBER)){
+				if (hasType (TOP (s), LONG)){
+					long y = TOP_LONG (s);
+					POP (s);
+				} else{
+					char y = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double y = TOP_DOUBLE (s);
+				POP (s);
+			}
+			PUSH_LONG (s, x&y);
 		}
 		else if (strcmp(token, "|") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y | x);
+			if (hasType (TOP (s), NUMBER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP (s);
+				} else{
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+
+			if (hasType (TOP (s), NUMBER)){
+				if (hasType (TOP (s), LONG)){
+					long y = TOP_LONG (s);
+					POP (s);
+				} else{
+					char y = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double y = TOP_DOUBLE (s);
+				POP (s);
+			}
+			PUSH_LONG (s, x|y);
 		}
 		else if (strcmp(token, "^") == 0)
 		{
-			DATA x = TOP(s);
-			POP(s);
-			DATA y = TOP(s);
-			POP(s);
-			PUSH(s, y ^ x);
+			if (hasType (TOP (s), NUMBER)){
+				if (hasType (TOP (s), LONG)){
+					long x = TOP_LONG (s);
+					POP (s);
+				} else{
+					char x = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double x = TOP_DOUBLE (s);
+				POP (s);
+			}
+
+			if (hasType (TOP (s), NUMBER)){
+				if (hasType (TOP (s), LONG)){
+					long y = TOP_LONG (s);
+					POP (s);
+				} else{
+					char y = TOP_CHAR (s);
+					POP (s);
+				}
+			} else {
+				double y = TOP_DOUBLE (s);
+				POP (s);
+			}
+			PUSH_LONG (s, x^y);
 		}
 		else if (strcmp(token, "~") == 0)
 		{
