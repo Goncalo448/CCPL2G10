@@ -43,6 +43,10 @@ void parse(char *input)
 				double x = TOP_DOUBLE(s);
 				POP(s);
 			}
+			else if(hasType(TOP(s), CHAR)){
+				char x = TOP_CHAR(s);
+				POP(s);
+			}
 			else
 			{
 				printf("Operação inválida\n");
@@ -57,6 +61,10 @@ void parse(char *input)
 			else if (hasType(TOP(s), DOUBLE))
 			{
 				double y = TOP_DOUBLE(s);
+				POP(s);
+			}
+			else if(hasType(TOP(s), CHAR)){
+				char y = TOP_CHAR(s);
 				POP(s);
 			}
 			else
@@ -86,6 +94,10 @@ void parse(char *input)
 				double x = TOP_DOUBLE(s);
 				POP(s);
 			}
+			else if(hasType(TOP(s), CHAR)){
+				char x = TOP_CHAR(s);
+				POP(s);
+			}
 			else
 			{
 				printf("Operação inválida\n");
@@ -99,6 +111,10 @@ void parse(char *input)
 			else if (hasType(TOP(s), DOUBLE))
 			{
 				double y = TOP_DOUBLE(s);
+				POP(s);
+			}
+			else if(hasType(TOP(s), CHAR)){
+				char y = TOP_CHAR(s);
 				POP(s);
 			}
 			else
@@ -127,6 +143,10 @@ void parse(char *input)
 				double x = TOP_DOUBLE(s);
 				POP(s);
 			}
+			else if(hasType(TOP(s), CHAR)){
+				char x = TOP_DOUBLE(s);
+				POP(s);
+			}
 			else
 			{
 				printf("Operação inválida\n");
@@ -141,6 +161,10 @@ void parse(char *input)
 			else if (hasType(TOP(s), DOUBLE))
 			{
 				double y = TOP_DOUBLE(s);
+				POP(s);
+			}
+			else if(hasType(TOP(s), CHAR)){
+				char y = TOP_CHAR(s);
 				POP(s);
 			}
 			else
