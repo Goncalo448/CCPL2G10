@@ -269,7 +269,7 @@ void parse(char *input)
 				PUSH_DOUBLE(s, x++);
 			}
 		}
-		else if (strcmp(token, '%') == 0)
+		else if (strcmp(token, "%") == 0)
 		{
 			if (hasType(TOP(s), LONG))
 			{
@@ -578,7 +578,7 @@ void parse(char *input)
 		{
 			DATA x = TOP(s);
 			POP(s);
-			DATA y = TOP(s); // x y
+			DATA y = TOP(s);
 			POP(s);
 			PUSH(s, x);
 			PUSH(s, y);
@@ -594,7 +594,7 @@ void parse(char *input)
 			PUSH(s, y);
 			PUSH(s, x);
 			PUSH(s, z);
-		}
+		}/*
 		else if (strcmp(token, "$") == 0)
 		{
 			if (hasType(TOP(s), LONG))
@@ -616,7 +616,7 @@ void parse(char *input)
 			while (n > 0)
 			{
 			}
-		}
+		}*/
 	}
 	printStack(s);
 }
