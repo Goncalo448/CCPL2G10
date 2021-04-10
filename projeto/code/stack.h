@@ -50,7 +50,9 @@ DATA TOP(STACK *s);
 
 void PUSH(STACK *s, DATA x);
 
-void POP(STACK *s);
+DATA POP(STACK *s);
+
+DATA profundidade(STACK *s, int x);
 
 int hasType(DATA x, int mask);
 
@@ -64,7 +66,7 @@ void printStack(STACK *s);
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
-	_type TOP_##_name(STACK *s);
+	_type POP_##_name(STACK *s);
 
 STACK_OPERATION_PROTO(long, LONG)
 STACK_OPERATION_PROTO(double, DOUBLE)

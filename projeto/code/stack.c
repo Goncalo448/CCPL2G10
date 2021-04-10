@@ -41,9 +41,9 @@ void PUSH(STACK *s, DATA x)
 	s->num += 1;
 }
 
-void POP(STACK *s)
-{
-	s->array[s->num--];
+DATA POP(STACK *s){
+	s->num--;
+	return s->array[s->num];
 }
 
 /**
@@ -52,7 +52,11 @@ void POP(STACK *s)
 
 DATA TOP(STACK *s)
 {
-	return s->array[s->num];
+	return s->array[s->num-1];
+}
+
+DATA profundidade(STACK *s, int x){
+	return s->array[s->num-x];
 }
 
 
@@ -67,7 +71,7 @@ int isEmpty(STACK *s){
 void printStack(STACK *s)
 {
 
-	for (int i; i < s->num; i++)
+	for (int i = 0; i < s->num; i++)
 	{
 		DATA x = s->array[i];
 		TYPE tipo = x.type;
@@ -98,8 +102,8 @@ void printStack(STACK *s)
 		elemento._name = val;                \
 		PUSH(s, elemento);                   \
 	}                                        \
-	_type TOP_##_name(STACK *s){             \
-		DATA elemento = TOP(s);              \
+	_type POP_##_name(STACK *s){             \
+		DATA elemento = POP(s);              \
 		assert(elemento.type == _name);      \
 		return elemento._name;               \
 	}
