@@ -78,16 +78,16 @@ void printStack(STACK *s)
 		switch (tipo)
 		{
 		case LONG:
-			printf("%ld ", x.LONG);
+			printf(" ""%ld", x.LONG);
 			break;
 		case DOUBLE:
-			printf("%lf ", x.DOUBLE);
+			printf(" ""%g", x.DOUBLE);
 			break;
 		case CHAR:
-			printf("%c ", x.CHAR);
+			printf(" ""%c", x.CHAR);
 			break;
 		case STRING:
-			printf("%s ", x.STRING);
+			printf(" ""%s", x.STRING);
 			break;
 		}
 	}

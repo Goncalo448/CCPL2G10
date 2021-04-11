@@ -71,554 +71,346 @@ void parse(char *input)
 				double y = POP_DOUBLE(s);
 				PUSH_DOUBLE(s, y+x);
 			}
-			
 		}
 		else if (strcmp(token, "-") == 0)
 		{
-			if (hasType(TOP(s), LONG))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
 				long x = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-			if (hasType(TOP(s), LONG))
-			{
 				long y = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
+				PUSH_LONG(s, y-x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
+				long x = POP_LONG(s);
 				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
+				PUSH_DOUBLE(s, y-x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
 				char y = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-			if (hasType(y - x, LONG))
-			{
-				PUSH_LONG(s, y - x);
-			}
-			else
-			{
-				PUSH_DOUBLE(s, y - x);
+				PUSH_DOUBLE(s, y-x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
+				double x = POP_DOUBLE(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s,y-x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
+				double x = POP_DOUBLE(s);
+				long y = POP_LONG(s);
+				PUSH_DOUBLE(s, y-x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
+				double x = POP_DOUBLE(s);
+				char y = POP_CHAR(s);
+				PUSH_DOUBLE(s, y-x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_CHAR(s, y-x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y-x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
+				char x = POP_CHAR(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s, y-x);
 			}
 		}
 		else if (strcmp(token, "*") == 0)
 		{
-			if (hasType(TOP(s), LONG))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
 				long x = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
-				char x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(TOP(s), LONG))
-			{
 				long y = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
+				PUSH_LONG(s, y*x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
+				long x = POP_LONG(s);
 				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
+				PUSH_DOUBLE(s, y*x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
 				char y = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(x * y, LONG))
-			{
-				PUSH_LONG(s, x * y);
-			}
-			else
-			{
-				PUSH_DOUBLE(s, x * y);
+				PUSH_DOUBLE(s, y*x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
+				double x = POP_DOUBLE(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s,y*x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
+				double x = POP_DOUBLE(s);
+				long y = POP_LONG(s);
+				PUSH_DOUBLE(s, y*x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
+				double x = POP_DOUBLE(s);
+				char y = POP_CHAR(s);
+				PUSH_DOUBLE(s, y*x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_CHAR(s, y*x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y*x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
+				char x = POP_CHAR(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s, y*x);
 			}
 		}
 		else if (strcmp(token, "/") == 0)
 		{
-			if (hasType(TOP(s), LONG))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
 				long x = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(TOP(s), LONG))
-			{
 				long y = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
+				double z = y/x;
+				PUSH_DOUBLE(s, z);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
+				long x = POP_LONG(s);
 				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
+				PUSH_DOUBLE(s, y/x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
 				char y = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(y / x, LONG))
-			{
-				PUSH_LONG(s, y / x);
-			}
-			else
-			{
-				PUSH_DOUBLE(s, y / x);
+				PUSH_DOUBLE(s, y/x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
+				double x = POP_DOUBLE(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s,y/x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
+				double x = POP_DOUBLE(s);
+				long y = POP_LONG(s);
+				PUSH_DOUBLE(s, y/x);
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
+				double x = POP_DOUBLE(s);
+				char y = POP_CHAR(s);
+				PUSH_DOUBLE(s, y/x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_CHAR(s, y/x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y/x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
+				char x = POP_CHAR(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s, y/x);
 			}
 		}
 		else if (strcmp(token, "(") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else if(hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}else{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(x--, LONG))
-			{
+			if(hasType(TOP(s), LONG)){
+				long x = POP_LONG(s);
 				PUSH_LONG(s, x--);
-			}
-			else if (hasType(x--, CHAR))
-			{
-				PUSH_CHAR(s, x--);
-			}
-			else
-			{
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = POP_DOUBLE(s);
 				PUSH_DOUBLE(s, x--);
+			}else if(hasType(TOP(s), CHAR)){
+				char x = POP_CHAR(s);
+				PUSH_CHAR(s, x--);
 			}
 		}
 		else if (strcmp(token, ")") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else if(hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(x++, LONG))
-			{
+			if(hasType(TOP(s), LONG)){
+				long x = POP_LONG(s);
 				PUSH_LONG(s, x++);
-			}
-			else if (hasType(x++, CHAR))
-			{
-				PUSH_CHAR(s, x++);
-			}
-			else
-			{
+			}else if(hasType(TOP(s), DOUBLE)){
+				double x = POP_DOUBLE(s);
 				PUSH_DOUBLE(s, x++);
+			}else if(hasType(TOP(s), CHAR)){
+				char x = POP_CHAR(s);
+				PUSH_CHAR(s, x++);
 			}
 		}
 		else if (strcmp(token, "%") == 0)
 		{
-			if (hasType(TOP(s), LONG))
-			{
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG)){
 				long x = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(TOP(s), LONG))
-			{
 				long y = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
+				PUSH_LONG(s, y%x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
 				char y = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(y % x, LONG))
-			{
-				PUSH_LONG(s, y % x);
-			}
-			else
-			{
-				PUSH_DOUBLE(s, y % x);
+				long z = y%x;
+				PUSH_LONG(s, z);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				long z = y%x;
+				PUSH_LONG(s, z);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				long z = y%x;
+				PUSH_LONG(s, z);
 			}
 		}
 		else if (strcmp(token, "#") == 0)
 		{
-			if (hasType(TOP(s), LONG))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
 				long x = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-
-			if (hasType(TOP(s), LONG))
-			{
 				long y = POP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
+				long x = POP_LONG(s);
 				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			else if(hasType(TOP(s), CHAR)){
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
 				char y = POP_CHAR(s);
-				POP(s);
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
+				double x = POP_DOUBLE(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s,pow(y,x));
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
+				double x = POP_DOUBLE(s);
+				long y = POP_LONG(s);
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
+				double x = POP_DOUBLE(s);
+				char y = POP_CHAR(s);
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_DOUBLE(s, pow(y,x));
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
+				char x = POP_CHAR(s);
+				double y = POP_DOUBLE(s);
+				PUSH_DOUBLE(s, pow(y,x));
 			}
-			else
-			{
-				printf("Operação inválida\n");
-				break;
-			}
-			
-			double z = pow(y, x);
-			PUSH_DOUBLE(s, z);
 		}
 		else if (strcmp(token, "&") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
+				long x = POP_LONG(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y&x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
+				char y = POP_CHAR(s);
+				PUSH_LONG(s, y&x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_LONG(s, y&x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y&x);
 			}
-			else
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long y = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char y = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else
-			{
-				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			PUSH_LONG(s, x & y);
 		}
 		else if (strcmp(token, "|") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
+				long x = POP_LONG(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y|x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
+				char y = POP_CHAR(s);
+				PUSH_LONG(s, y|x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_LONG(s, y|x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y|x);
 			}
-			else
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long y = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char y = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else
-			{
-				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			PUSH_LONG(s, x | y);
 		}
 		else if (strcmp(token, "^") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
+			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
 			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
+				long x = POP_LONG(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y^x);
+			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
+				long x = POP_LONG(s);
+				char y = POP_CHAR(s);
+				PUSH_LONG(s, y^x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
+				char x = POP_CHAR(s);
+				char y = POP_CHAR(s);
+				PUSH_LONG(s, y^x);
+			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
+				char x = POP_CHAR(s);
+				long y = POP_LONG(s);
+				PUSH_LONG(s, y^x);
 			}
-			else
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long y = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char y = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else
-			{
-				double y = POP_DOUBLE(s);
-				POP(s);
-			}
-			PUSH_LONG(s, x ^ y);
 		}
 		else if (strcmp(token, "~") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
+			if(hasType(TOP(s), LONG)){
+				long x = POP_LONG(s);
+				PUSH_LONG(s, ~x);
+			}else if(hasType(TOP(s), CHAR)){
+				char x = POP_CHAR(s);
+				PUSH_CHAR(s, ~x);
 			}
-			else
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			PUSH_LONG(s, ~x);
-		}
+		}/*
 		else if (strcmp(token, "l") == 0)
 		{
-			char p[50];
-			fgets(p, 50, stdin);
-			PUSH_STRING(s, p);
-		}
+			char str[50];
+			fgets(str, sizeof(str), stdin);
+			PUSH_STRING(s, str);
+		}*/
 		else if (strcmp(token, "i") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else
-			{
+			if(hasType(TOP(s), DOUBLE)){
 				double x = POP_DOUBLE(s);
-				POP(s);
+				long y = x;
+				PUSH_LONG(s, y);
+			}else if(hasType(TOP(s), CHAR)){
+				char x = POP_CHAR(s);
+				long y = x;
+				PUSH_LONG(s, y);
 			}
-			long y = x;
-			PUSH_LONG(s, y);
 		}
 		else if (strcmp(token, "f") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
+			if(hasType(TOP(s), LONG)){
+				long x = POP_LONG(s);
+				double y = x;
+				PUSH_DOUBLE(s, y);
+			}else if(hasType(TOP(s), CHAR)){
+				char x = POP_CHAR(s);
+				double y = x;
+				PUSH_DOUBLE(s, y);
 			}
-			else
-			{
-				double x = POP_DOUBLE(s);
-				POP(s);
-			}
-			double y = x;
-			PUSH_LONG(s, y);
 		}
 		else if (strcmp(token, "c") == 0)
 		{
-			if (hasType(TOP(s), INTEGER))
-			{
-				if (hasType(TOP(s), LONG))
-				{
-					long x = POP_LONG(s);
-					POP(s);
-				}
-				else
-				{
-					char x = POP_CHAR(s);
-					POP(s);
-				}
-			}
-			else
-			{
+			if(hasType(TOP(s), LONG)){
+				long x = POP_LONG(s);
+				char y = x;
+				PUSH_CHAR(s, y);
+			}else if(hasType(TOP(s), DOUBLE)){
 				double x = POP_DOUBLE(s);
-				POP(s);
+				char y = x;
+				PUSH_CHAR(s, y);
 			}
-			char y = x;
-			PUSH_LONG(s, y);
-		}
+		}/*
 		else if (strcmp(token, "s") == 0)
 		{
 			// fazer depois
+		}*/
+		else if(strcmp(token, "_") == 0)
+		{
+			DATA x = TOP(s);
+			POP(s);
+			PUSH(s, x);
+			PUSH(s, x);
 		}
 		else if (strcmp(token, ";") == 0)
 		{
@@ -644,29 +436,12 @@ void parse(char *input)
 			PUSH(s, y);
 			PUSH(s, x);
 			PUSH(s, z);
-		}/*
+		}
 		else if (strcmp(token, "$") == 0)
 		{
-			if (hasType(TOP(s), LONG))
-			{
-				long n = TOP_LONG(s);
-				POP(s);
-			}
-			else if (hasType(TOP(s), DOUBLE))
-			{
-				double n = TOP_DOUBLE(s);
-				POP(s);
-			}
-			else
-			{
-				printf("Tipo inválido\n");
-				break;
-			}
-
-			while (n > 0)
-			{
-			}
-		}*/
+			long x = POP_LONG(s);
+			PUSH(s, profundidade(s, x+1));
+		}
 	}
 	printStack(s);
 }
