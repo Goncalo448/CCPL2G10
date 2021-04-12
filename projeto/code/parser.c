@@ -5,8 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <assert.h>
 #include "parser.h"
 #include "stack.h"
+
+
+#define max(x,y)	((x) > (y)) ? (x) : (y) 
+
 
 /**
  * \brief Esta função faz o parse do input.
@@ -20,7 +25,7 @@ void parse(char *input)
 {
 
 	char *delims = " \t\n";
-	long a;
+	double a;
 	STACK *s = createStack();
 
 	for (char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
@@ -30,352 +35,126 @@ void parse(char *input)
 		if (strlen(resto) == 0)
 		{
 			PUSH_LONG(s, a);
+			continue;
 		}
-		else if (strcmp(token, "+") == 0)
+		a = strtod(token, &resto);
+		if (strlen(resto) == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y+x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
-				long x = POP_LONG(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y+x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y+x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y+x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
-				double x = POP_DOUBLE(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, y+x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
-				double x = POP_DOUBLE(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y+x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_CHAR(s, y+x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y+x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
-				char x = POP_CHAR(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y+x);
-			}
+			PUSH_DOUBLE(s, a);
+			continue;
+		}
+		if (strcmp(token, "+") == 0)
+		{
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			double vx = get_double(x);
+			double vy = get_double(y);
+			PUSH_TYPE(s, vy+vx, ret_t);
 		}
 		else if (strcmp(token, "-") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y-x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
-				long x = POP_LONG(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y-x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y-x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s,y-x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
-				double x = POP_DOUBLE(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, y-x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
-				double x = POP_DOUBLE(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y-x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_CHAR(s, y-x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y-x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
-				char x = POP_CHAR(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y-x);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			double vx = get_double(x);
+			double vy = get_double(y);
+			PUSH_TYPE(s, vy-vx, ret_t);
 		}
 		else if (strcmp(token, "*") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y*x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
-				long x = POP_LONG(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y*x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y*x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s,y*x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
-				double x = POP_DOUBLE(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, y*x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
-				double x = POP_DOUBLE(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y*x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_CHAR(s, y*x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y*x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
-				char x = POP_CHAR(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y*x);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			double vx = get_double(x);
+			double vy = get_double(y);
+			PUSH_TYPE(s, vy*vx, ret_t);
 		}
 		else if (strcmp(token, "/") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				double z = y/x;
-				PUSH_DOUBLE(s, z);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
-				long x = POP_LONG(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y/x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y/x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s,y/x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
-				double x = POP_DOUBLE(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, y/x);
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
-				double x = POP_DOUBLE(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, y/x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_CHAR(s, y/x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y/x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
-				char x = POP_CHAR(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, y/x);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			double vx = get_double(x);
+			double vy = get_double(y);
+			PUSH_TYPE(s, vy/vx, ret_t);
 		}
 		else if (strcmp(token, "(") == 0)
 		{
-			if(hasType(TOP(s), LONG)){
-				long x = POP_LONG(s);
-				PUSH_LONG(s, x--);
-			}else if(hasType(TOP(s), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, x--);
-			}else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				PUSH_CHAR(s, x--);
-			}
+			DATA x = POP(s);
+			TYPE ret_t = x.type;
+			double vx = get_double(x);
+			PUSH_TYPE(s, vx-1, ret_t);
 		}
 		else if (strcmp(token, ")") == 0)
 		{
-			if(hasType(TOP(s), LONG)){
-				long x = POP_LONG(s);
-				PUSH_LONG(s, x++);
-			}else if(hasType(TOP(s), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, x++);
-			}else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				PUSH_CHAR(s, x++);
-			}
+			DATA x = POP(s);
+			TYPE ret_t = x.type;
+			double vx = get_double(x);
+			PUSH_TYPE(s, vx+1, ret_t);
 		}
 		else if (strcmp(token, "%") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG)){
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y%x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				long z = y%x;
-				PUSH_LONG(s, z);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				long z = y%x;
-				PUSH_LONG(s, z);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				long z = y%x;
-				PUSH_LONG(s, z);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			long vx = get_double(x);
+			long vy = get_double(y);
+			PUSH_TYPE(s, vy%vx, ret_t);
 		}
 		else if (strcmp(token, "#") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), DOUBLE)){
-				long x = POP_LONG(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s,pow(y,x));
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
-				double x = POP_DOUBLE(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), CHAR)){
-				double x = POP_DOUBLE(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), DOUBLE)){
-				char x = POP_CHAR(s);
-				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s, pow(y,x));
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			double vx = get_double(x);
+			double vy = get_double(y);
+			PUSH_TYPE(s, pow(vy, vx), DOUBLE);
 		}
 		else if (strcmp(token, "&") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y&x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_LONG(s, y&x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_LONG(s, y&x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y&x);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			long vx = get_double(x);
+			long vy = get_double(y);
+			PUSH_TYPE(s, vx&vy, ret_t);
 		}
 		else if (strcmp(token, "|") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y|x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_LONG(s, y|x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_LONG(s, y|x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y|x);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			long vx = get_double(x);
+			long vy = get_double(y);
+			PUSH_TYPE(s, vx|vy, ret_t);
 		}
 		else if (strcmp(token, "^") == 0)
 		{
-			if (hasType(profundidade(s,1), LONG) && hasType(profundidade(s, 2), LONG))
-			{
-				long x = POP_LONG(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y^x);
-			}else if(hasType(profundidade(s,1), LONG) && hasType(profundidade(s,2), CHAR)){
-				long x = POP_LONG(s);
-				char y = POP_CHAR(s);
-				PUSH_LONG(s, y^x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), CHAR)){
-				char x = POP_CHAR(s);
-				char y = POP_CHAR(s);
-				PUSH_LONG(s, y^x);
-			}else if(hasType(profundidade(s,1), CHAR) && hasType(profundidade(s,2), LONG)){
-				char x = POP_CHAR(s);
-				long y = POP_LONG(s);
-				PUSH_LONG(s, y^x);
-			}
+			DATA x = POP(s);
+			DATA y = POP(s);
+			TYPE ret_t = max(x.type, y.type);
+			long vx = get_double(x);
+			long vy = get_double(y);
+			PUSH_TYPE(s, vx^vy, ret_t);
 		}
 		else if (strcmp(token, "~") == 0)
 		{
-			if(hasType(TOP(s), LONG)){
-				long x = POP_LONG(s);
-				PUSH_LONG(s, ~x);
-			}else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				PUSH_CHAR(s, ~x);
-			}
-		}/*
+			DATA x = POP(s);
+			TYPE ret_t = x.type;
+			long vx = get_double(x);
+			PUSH_TYPE(s, ~vx, ret_t);
+		}
 		else if (strcmp(token, "l") == 0)
 		{
-			char str[50];
-			fgets(str, sizeof(str), stdin);
-			PUSH_STRING(s, str);
-		}*/
+			char str[10000];
+			assert(fgets(str, sizeof(str), stdin) != NULL);
+			PUSH_STRING(s, strdup(str));
+		}
 		else if (strcmp(token, "i") == 0)
 		{
-			if(hasType(TOP(s), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				long y = x;
-				PUSH_LONG(s, y);
-			}else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				long y = x;
-				PUSH_LONG(s, y);
-			}
+			DATA x = POP(s);
+			long vx = get_double(x);
+			PUSH_TYPE(s, vx, LONG);
 		}
 		else if (strcmp(token, "f") == 0)
 		{
@@ -400,11 +179,7 @@ void parse(char *input)
 				char y = x;
 				PUSH_CHAR(s, y);
 			}
-		}/*
-		else if (strcmp(token, "s") == 0)
-		{
-			// fazer depois
-		}*/
+		}
 		else if(strcmp(token, "_") == 0)
 		{
 			DATA x = TOP(s);

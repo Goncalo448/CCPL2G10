@@ -9,9 +9,9 @@
  
 typedef enum
 {
-	LONG = 1,
-	DOUBLE = 2,
-	CHAR = 4,
+	LONG = 2,
+	DOUBLE = 4,
+	CHAR = 1,
 	STRING = 8
 } TYPE;
 
@@ -57,6 +57,10 @@ DATA TOP(STACK *s);
 DATA profundidade(STACK *s, int x);
 
 int isEmpty(STACK *s);
+
+double get_double(DATA elemento);
+
+void PUSH_TYPE(STACK *s, double val, TYPE t);
 
 /**
  * \brief Função que imprime a STACK

@@ -38,7 +38,7 @@ void PUSH(STACK *s, DATA x)
 		s->array = (DATA *)realloc(s->array, s->size * sizeof(DATA));
 	}
 	s->array[s->num] = x;
-	s->num += 1;
+	s->num++;
 }
 
 DATA POP(STACK *s){
@@ -70,7 +70,7 @@ int isEmpty(STACK *s){
  */
 void printStack(STACK *s)
 {
-
+#define SEP ""
 	for (int i = 0; i < s->num; i++)
 	{
 		DATA x = s->array[i];
@@ -78,16 +78,16 @@ void printStack(STACK *s)
 		switch (tipo)
 		{
 		case LONG:
-			printf(" ""%ld", x.LONG);
+			printf(SEP"%ld", x.LONG);
 			break;
 		case DOUBLE:
-			printf(" ""%g", x.DOUBLE);
+			printf(SEP"%g", x.DOUBLE);
 			break;
 		case CHAR:
-			printf(" ""%c", x.CHAR);
+			printf(SEP"%c", x.CHAR);
 			break;
 		case STRING:
-			printf(" ""%s", x.STRING);
+			printf(SEP"%s", x.STRING);
 			break;
 		}
 	}
@@ -107,6 +107,44 @@ void printStack(STACK *s)
 		assert(elemento.type == _name);      \
 		return elemento._name;               \
 	}
+
+
+void PUSH_TYPE(STACK *s, double val, TYPE t){
+	DATA elemento;
+	elemento.type = t;
+	switch(elemento.type){
+		case LONG:
+			elemento.LONG = val;
+			break;
+		case DOUBLE:
+			elemento.DOUBLE = val;
+			break;
+		case CHAR: 
+			elemento.CHAR = val;
+			break;
+		default:
+			assert(0 && "tou a tentar fazer push de double para algo que não é um numero");
+			break;
+	}
+	PUSH(s, elemento);
+}
+
+double get_double(DATA elemento){
+	switch(elemento.type){
+		case LONG:
+			return elemento.LONG;
+			break;
+		case DOUBLE:
+			return elemento.DOUBLE;
+			break;
+		case CHAR: 
+			return elemento.CHAR;
+			break;
+		default:
+			assert(0 && "tou a tentar converter um DATA noutra coisa qualquer");
+			break;
+	}
+}
 
 
 STACK_OPERATION(long, LONG)
