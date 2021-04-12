@@ -49,7 +49,7 @@ void parse(char *input)
 			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), DOUBLE)){
 				double x = POP_DOUBLE(s);
 				double y = POP_DOUBLE(s);
-				PUSH_DOUBLE(s,y+x);
+				PUSH_DOUBLE(s, y+x);
 			}else if(hasType(profundidade(s,1), DOUBLE) && hasType(profundidade(s,2), LONG)){
 				double x = POP_DOUBLE(s);
 				long y = POP_LONG(s);

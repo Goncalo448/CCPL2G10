@@ -43,18 +43,18 @@ typedef struct stack
  */
 STACK *createStack();
 
-/**
- * \brief Função que pega o valor que está no topo da STACK.
- */
-DATA TOP(STACK *s);
+int hasType(DATA x, int mask);
 
 void PUSH(STACK *s, DATA x);
 
 DATA POP(STACK *s);
 
-DATA profundidade(STACK *s, int x);
+/**
+ * \brief Função que pega o valor que está no topo da STACK.
+ */
+DATA TOP(STACK *s);
 
-int hasType(DATA x, int mask);
+DATA profundidade(STACK *s, int x);
 
 int isEmpty(STACK *s);
 
