@@ -140,6 +140,8 @@ double get_double(DATA elemento){
 		case CHAR: 
 			return elemento.CHAR;
 			break;
+		case STRING:
+			return atof(elemento.STRING);
 		default:
 			assert(0 && "tou a tentar converter um DATA noutra coisa qualquer");
 			break;

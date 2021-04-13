@@ -158,27 +158,15 @@ void parse(char *input)
 		}
 		else if (strcmp(token, "f") == 0)
 		{
-			if(hasType(TOP(s), LONG)){
-				long x = POP_LONG(s);
-				double y = x;
-				PUSH_DOUBLE(s, y);
-			}else if(hasType(TOP(s), CHAR)){
-				char x = POP_CHAR(s);
-				double y = x;
-				PUSH_DOUBLE(s, y);
-			}
+			DATA x = POP(s);
+			double vx = get_double(x);
+			PUSH_TYPE(s, vx, DOUBLE);
 		}
 		else if (strcmp(token, "c") == 0)
 		{
-			if(hasType(TOP(s), LONG)){
-				long x = POP_LONG(s);
-				char y = x;
-				PUSH_CHAR(s, y);
-			}else if(hasType(TOP(s), DOUBLE)){
-				double x = POP_DOUBLE(s);
-				char y = x;
-				PUSH_CHAR(s, y);
-			}
+			DATA x = POP(s);
+			char vx = get_double(x);
+			PUSH_TYPE(s, vx, CHAR);
 		}
 		else if(strcmp(token, "_") == 0)
 		{
