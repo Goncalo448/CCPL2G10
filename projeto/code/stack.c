@@ -65,6 +65,63 @@ int isEmpty(STACK *s){
 	return s->num == 0;
 }
 
+
+#define max(x,y)	((x) > (y)) ? (x) : (y)
+
+
+void SOMA(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	PUSH_TYPE(s, vy+vx, ret_t);
+}
+
+
+void SUBTRACAO(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	PUSH_TYPE(s, vy-vx, ret_t);
+}
+
+
+void MULTIPLICACAO(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	PUSH_TYPE(s, vy*vx, ret_t);
+}
+
+
+void DIVISAO(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	PUSH_TYPE(s, vy/vx, ret_t);
+}
+
+/*
+void ARITMETICA(STACK *s, const char *token){
+	if(strcmp(token, "+") == 0){
+		SOMA(s);
+	}else if(strcmp(token, "-") == 0){
+		SUBTRACAO(s);
+	}else if(strcmp(token, "*") == 0){
+		MULTIPLICACAO(s);
+	}else if(strcmp(token, "/") == 0){
+		DIVISAO(s);
+	}
+}*/
+
+
 /**
  * \brief Esta função imprime a STACK.
  */

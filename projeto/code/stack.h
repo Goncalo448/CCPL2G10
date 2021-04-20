@@ -68,6 +68,18 @@ void PUSH_TYPE(STACK *s, double val, TYPE t);
 void printStack(STACK *s);
 
 
+void SOMA(STACK *s);
+
+void SUBTRACAO(STACK *s);
+
+void MULTIPLICACAO(STACK *s);
+
+void DIVISAO(STACK *s);
+
+
+void ARITMETICA(STACK *s, const char *token);
+
+
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
 	_type POP_##_name(STACK *s);
