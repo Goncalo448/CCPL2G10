@@ -80,6 +80,17 @@ void DIVISAO(STACK *s);
 void ARITMETICA(STACK *s, const char *token);
 
 
+void DECREMENT(STACK *s);
+
+void INCREMENT(STACK *s);
+
+void MODULO(STACK *s);
+
+void EXPOENTE(STACK *s);
+
+void MAT(STACK *s, const char *token);
+
+
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
 	_type POP_##_name(STACK *s);

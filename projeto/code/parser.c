@@ -47,72 +47,13 @@ void parse(char *input)
 			PUSH_DOUBLE(s, a);
 			continue;
 		}
-		if (strcmp(token, "+") == 0)
+		if (strcmp(token, "+") == 0 || strcmp(token, "-") == 0 || strcmp(token, "*") == 0 || strcmp(token, "/") == 0)
 		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			PUSH_TYPE(s, vy+vx, ret_t);
+			ARITMETICA(s, token);
 		}
-		else if (strcmp(token, "-") == 0)
+		else if (strcmp(token, "(") == 0 || strcmp(token, ")") == 0 || strcmp(token, "%") == 0 || strcmp(token, "#") == 0)
 		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			PUSH_TYPE(s, vy-vx, ret_t);
-		}
-		else if (strcmp(token, "*") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			PUSH_TYPE(s, vy*vx, ret_t);
-		}
-		else if (strcmp(token, "/") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			PUSH_TYPE(s, vy/vx, ret_t);
-		}
-		else if (strcmp(token, "(") == 0)
-		{
-			DATA x = POP(s);
-			TYPE ret_t = x.type;
-			double vx = get_double(x);
-			PUSH_TYPE(s, vx-1, ret_t);
-		}
-		else if (strcmp(token, ")") == 0)
-		{
-			DATA x = POP(s);
-			TYPE ret_t = x.type;
-			double vx = get_double(x);
-			PUSH_TYPE(s, vx+1, ret_t);
-		}
-		else if (strcmp(token, "%") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			long vx = get_double(x);
-			long vy = get_double(y);
-			PUSH_TYPE(s, vy%vx, ret_t);
-		}
-		else if (strcmp(token, "#") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			PUSH_TYPE(s, pow(vy, vx), DOUBLE);
+			MAT(s, token);
 		}
 		else if (strcmp(token, "&") == 0)
 		{

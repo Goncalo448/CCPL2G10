@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
+#include <math.h>
 #include "stack.h"
 #define limit 10240
 
@@ -108,7 +110,7 @@ void DIVISAO(STACK *s){
 	PUSH_TYPE(s, vy/vx, ret_t);
 }
 
-/*
+
 void ARITMETICA(STACK *s, const char *token){
 	if(strcmp(token, "+") == 0){
 		SOMA(s);
@@ -119,7 +121,51 @@ void ARITMETICA(STACK *s, const char *token){
 	}else if(strcmp(token, "/") == 0){
 		DIVISAO(s);
 	}
-}*/
+}
+
+
+void DECREMENT(STACK *s){
+	DATA x = POP(s);
+	TYPE ret_t = x.type;
+	double vx = get_double(x);
+	PUSH_TYPE(s, vx-1, ret_t);
+}
+
+void INCREMENT(STACK *s){
+	DATA x = POP(s);
+	TYPE ret_t = x.type;
+	double vx = get_double(x);
+	PUSH_TYPE(s, vx+1, ret_t);
+}
+
+void MODULO(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	long vx = get_double(x);
+	long vy = get_double(y);
+	PUSH_TYPE(s, vy%vx, ret_t);
+}
+
+void EXPOENTE(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	PUSH_TYPE(s, pow(vy, vx), DOUBLE);
+}
+
+void MAT(STACK *s, const char *token){
+	if(strcmp(token, "(") == 0){
+		DECREMENT(s);
+	}else if(strcmp(token, ")") == 0){
+		INCREMENT(s);
+	}else if(strcmp(token, "%") == 0){
+		MODULO(s);
+	}else if(strcmp(token, "#") == 0){
+		EXPOENTE(s);
+	}
+}
 
 
 /**
