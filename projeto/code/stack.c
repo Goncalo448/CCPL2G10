@@ -213,6 +213,35 @@ void BITWISE(STACK *s, const char *token){
 	}
 }
 
+
+void CONVERTE_INT(STACK *s){
+	DATA x = POP(s);
+	long vx = get_double(x);
+	PUSH_TYPE(s, vx, LONG);
+}
+
+void CONVERTE_FLOAT(STACK *s){
+	DATA x = POP(s);
+	double vx = get_double(x);
+	PUSH_TYPE(s, vx, DOUBLE);
+}
+
+void CONVERTE_CHAR(STACK *s){
+	DATA x = POP(s);
+	char vx = get_double(x);
+	PUSH_TYPE(s, vx, CHAR);
+}
+
+void CONVERSAO(STACK *s, const char *token){
+	if(strcmp(token, "i") == 0){
+		CONVERTE_INT(s);
+	}else if(strcmp(token, "f") == 0){
+		CONVERTE_FLOAT(s);
+	}else if(strcmp(token, "c") == 0){
+		CONVERTE_CHAR(s);
+	}
+}
+
 /**
  * \brief Esta função imprime a STACK.
  */

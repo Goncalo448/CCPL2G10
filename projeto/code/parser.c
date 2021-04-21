@@ -65,23 +65,9 @@ void parse(char *input)
 			assert(fgets(str, sizeof(str), stdin) != NULL);
 			PUSH_STRING(s, strdup(str));
 		}
-		else if (strcmp(token, "i") == 0)
+		else if (strcmp(token, "i") == 0 || strcmp(token, "f") == 0 || strcmp(token, "c") == 0)
 		{
-			DATA x = POP(s);
-			long vx = get_double(x);
-			PUSH_TYPE(s, vx, LONG);
-		}
-		else if (strcmp(token, "f") == 0)
-		{
-			DATA x = POP(s);
-			double vx = get_double(x);
-			PUSH_TYPE(s, vx, DOUBLE);
-		}
-		else if (strcmp(token, "c") == 0)
-		{
-			DATA x = POP(s);
-			char vx = get_double(x);
-			PUSH_TYPE(s, vx, CHAR);
+			CONVERSAO(s, token);
 		}
 		else if(strcmp(token, "_") == 0)
 		{
@@ -195,8 +181,7 @@ void parse(char *input)
 			}else if(vy == 0){
 				PUSH(s, x);
 			}else{
-				TYPE ret_t = min(x.type, y.type);
-				PUSH_TYPE(s, min(vx,vy), ret_t);
+				PUSH_TYPE(s, min(vx,vy), DOUBLE);
 			}
 		}
 		else if(strcmp(token, "e<") == 0)
