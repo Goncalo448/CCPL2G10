@@ -167,6 +167,51 @@ void MAT(STACK *s, const char *token){
 	}
 }
 
+void AND(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	long vx = get_double(x);
+	long vy = get_double(y);
+	PUSH_TYPE(s, vx&vy, ret_t);
+}
+
+void OR(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	long vx = get_double(x);
+	long vy = get_double(y);
+	PUSH_TYPE(s, vx|vy, ret_t);
+}
+
+void XOR(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	TYPE ret_t = max(x.type, y.type);
+	long vx = get_double(x);
+	long vy = get_double(y);
+	PUSH_TYPE(s, vx^vy, ret_t);
+}
+
+void NOT(STACK *s){
+	DATA x = POP(s);
+	TYPE ret_t = x.type;
+	long vx = get_double(x);
+	PUSH_TYPE(s, ~vx, ret_t);
+}
+
+void BITWISE(STACK *s, const char *token){
+	if(strcmp(token, "&")==0){
+		AND(s);
+	} else if(strcmp(token, "|")==0){
+		OR(s);
+	} else if(strcmp(token, "^")==0){
+		XOR(s);
+	} else if(strcmp(token, "~")==0){
+		NOT(s);
+	}
+}
 
 /**
  * \brief Esta função imprime a STACK.
