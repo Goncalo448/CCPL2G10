@@ -55,41 +55,11 @@ void parse(char *input)
 		{
 			MAT(s, token);
 		}
-		else if (strcmp(token, "&") == 0)
+		else if (strcmp(token, "&") == 0 || strcmp(token, "|") == 0 || strcmp(token, "^") == 0 || strcmp(token, "~") == 0 )
 		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			long vx = get_double(x);
-			long vy = get_double(y);
-			PUSH_TYPE(s, vx&vy, ret_t);
+			BITWISE(s, token);
 		}
-		else if (strcmp(token, "|") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			long vx = get_double(x);
-			long vy = get_double(y);
-			PUSH_TYPE(s, vx|vy, ret_t);
-		}
-		else if (strcmp(token, "^") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			TYPE ret_t = max(x.type, y.type);
-			long vx = get_double(x);
-			long vy = get_double(y);
-			PUSH_TYPE(s, vx^vy, ret_t);
-		}
-		else if (strcmp(token, "~") == 0)
-		{
-			DATA x = POP(s);
-			TYPE ret_t = x.type;
-			long vx = get_double(x);
-			PUSH_TYPE(s, ~vx, ret_t);
-		}
-		else if (strcmp(token, "l") == 0)
+  		else if (strcmp(token, "l") == 0)
 		{
 			char str[10000];
 			assert(fgets(str, sizeof(str), stdin) != NULL);
