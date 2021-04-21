@@ -90,6 +90,16 @@ void EXPOENTE(STACK *s);
 
 void MAT(STACK *s, const char *token);
 
+void AND(STACK *s);
+
+void OR(STACK *s);
+
+void XOR(STACK *s);
+
+void NOT(STACK *s);
+
+void BITWISE(STACK *s, const char *token);
+
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
