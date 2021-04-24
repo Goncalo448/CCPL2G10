@@ -242,6 +242,35 @@ void CONVERSAO(STACK *s, const char *token){
 	}
 }
 
+
+void 
+
+/*void create_letter_array(){
+	char arr[26][26];
+
+}*/
+
+
+#define A 10
+#define B 11
+#define C 12
+#define D 13
+#define E 14
+#define F 15
+#define N '\n'
+#define S ' '
+#define X 0
+#define Y 1
+#define Z 2
+
+void VARIAVEIS(STACK *s, const char *token){
+	
+	if(strcmp(token, 'A') == 0){
+		TYPE ret_t = A.type;
+		
+	}
+}
+
 /**
  * \brief Esta função imprime a STACK.
  */

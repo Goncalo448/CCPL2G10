@@ -100,6 +100,7 @@ void NOT(STACK *s);
 
 void BITWISE(STACK *s, const char *token);
 
+
 void CONVERTE_INT(STACK *s);
 
 void CONVERTE_FLOAT(STACK *s);
@@ -107,6 +108,9 @@ void CONVERTE_FLOAT(STACK *s);
 void CONVERTE_CHAR(STACK *s);
 
 void CONVERSAO(STACK *s, const char *token);
+
+
+void VARIAVEIS(STACK *s, const char *token);
 
 
 #define STACK_OPERATION_PROTO(_type, _name)  \

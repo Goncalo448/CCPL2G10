@@ -24,6 +24,19 @@
 
 #define min(x,y)    ((x) < (y)) ? (x) : (y)
 
+int verifica_token(char const *token){
+
+	if(strcmp(token, "+") == 0 || strcmp(token, "-") == 0 || strcmp(token, "*") == 0 || strcmp(token, "/") == 0){
+		return 1;
+	}else if(strcmp(token, "(") == 0 || strcmp(token, ")") == 0 || strcmp(token, "%") == 0 || strcmp(token, "#") == 0){
+		return 2;
+	}else if(strcmp(token, "&") == 0 || strcmp(token, "|") == 0 || strcmp(token, "^") == 0 || strcmp(token, "~") == 0){
+		return 3;
+	}
+
+	return 0;
+}
+
 
 void parse(char *input)
 {
@@ -36,26 +49,30 @@ void parse(char *input)
 	{
 		char *resto;
 		a = strtol(token, &resto, 10);
+
 		if (strlen(resto) == 0)
 		{
 			PUSH_LONG(s, a);
 			continue;
 		}
+
 		a = strtod(token, &resto);
 		if (strlen(resto) == 0)
 		{
 			PUSH_DOUBLE(s, a);
 			continue;
 		}
-		if (strcmp(token, "+") == 0 || strcmp(token, "-") == 0 || strcmp(token, "*") == 0 || strcmp(token, "/") == 0)
+		
+		int token_type = verifica_token(token);
+		if (token_type == 1)
 		{
 			ARITMETICA(s, token);
 		}
-		else if (strcmp(token, "(") == 0 || strcmp(token, ")") == 0 || strcmp(token, "%") == 0 || strcmp(token, "#") == 0)
+		else if (token_type == 2)
 		{
 			MAT(s, token);
 		}
-		else if (strcmp(token, "&") == 0 || strcmp(token, "|") == 0 || strcmp(token, "^") == 0 || strcmp(token, "~") == 0 )
+		else if (token_type == 3)
 		{
 			BITWISE(s, token);
 		}
@@ -181,7 +198,7 @@ void parse(char *input)
 			}else if(vy == 0){
 				PUSH(s, x);
 			}else{
-				PUSH_TYPE(s, min(vx,vy), DOUBLE);
+				PUSH_TYPE(s, max(vx,vy), DOUBLE);
 			}
 		}
 		else if(strcmp(token, "e<") == 0)
@@ -264,6 +281,7 @@ void parse(char *input)
 		{
 			PUSH_TYPE(s, 2, LONG);
 		}
+		/*else if(strcmp(token, ":") == 0)*/
 	}
 	printStack(s);
 }
