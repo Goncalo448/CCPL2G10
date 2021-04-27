@@ -109,6 +109,7 @@ void CONVERTE_CHAR(STACK *s);
 
 void CONVERSAO(STACK *s, const char *token);
 
+STACK *create_letter_array();
 
 void VARIAVEIS(STACK *s, const char *token);
 

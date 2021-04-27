@@ -243,31 +243,57 @@ void CONVERSAO(STACK *s, const char *token){
 }
 
 
-void 
+STACK *create_letter_array(){
+	
+	STACK *letras = (STACK *)malloc(sizeof(STACK));
+	assert(letras != NULL);
+	letras->num = 0;
+	letras->size = 26;
+	letras->array = (DATA *)calloc(letras->size, sizeof(DATA));
 
-/*void create_letter_array(){
-	char arr[26][26];
+	PUSH_LONG(letras, 10); 
+	PUSH_LONG(letras, 11);
+	PUSH_LONG(letras, 12);
+	PUSH_LONG(letras, 13);
+	PUSH_LONG(letras, 14);
+	PUSH_LONG(letras, 15);
+	letras->num = letras->num + 6;
+	PUSH_CHAR(letras, '\n');
+	letras->num += 3;
+	PUSH_CHAR(letras, ' ');
 
-}*/
+	return letras;
+}
 
-
-#define A 10
-#define B 11
-#define C 12
-#define D 13
-#define E 14
-#define F 15
-#define N '\n'
-#define S ' '
-#define X 0
-#define Y 1
-#define Z 2
 
 void VARIAVEIS(STACK *s, const char *token){
 	
-	if(strcmp(token, 'A') == 0){
-		TYPE ret_t = A.type;
-		
+	STACK *letras = create_letter_array();
+
+	if(strcmp(token, "A") == 0){
+		DATA x = letras->array[0];
+		PUSH(s, x);
+	}else if(strcmp(token, "B") == 0){
+		DATA x = letras->array[1];
+		PUSH(s, x);
+	}else if(strcmp(token, "C") == 0){
+		DATA x = letras->array[2];
+		PUSH(s, x);
+	}else if(strcmp(token, "D") == 0){
+		DATA x = letras->array[3];
+		PUSH(s, x);
+	}else if(strcmp(token, "E") == 0){
+		DATA x = letras->array[4];
+		PUSH(s, x);
+	}else if(strcmp(token, "F") == 0){
+		DATA x = letras->array[5];
+		PUSH(s, x);
+	}else if(strcmp(token, "N") == 0){
+		DATA x = letras->array[11];
+		PUSH(s, x);
+	}else if(strcmp(token, "S") == 0){
+		DATA x = letras->array[14];
+		PUSH(s, x);
 	}
 }
 

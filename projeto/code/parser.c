@@ -32,6 +32,8 @@ int verifica_token(char const *token){
 		return 2;
 	}else if(strcmp(token, "&") == 0 || strcmp(token, "|") == 0 || strcmp(token, "^") == 0 || strcmp(token, "~") == 0){
 		return 3;
+	}else if(strcmp(token, "A") == 0 || strcmp(token, "B") == 0 || strcmp(token, "C") == 0 || strcmp(token, "D") == 0 || strcmp(token, "E") == 0 || strcmp(token, "F") == 0 || strcmp(token, "G") == 0 || strcmp(token, "H") == 0 || strcmp(token, "I") == 0 || strcmp(token, "J") == 0 || strcmp(token, "K") == 0 || strcmp(token, "L") == 0 || strcmp(token, "M") == 0 || strcmp(token, "N") == 0 || strcmp(token, "O") == 0 || strcmp(token, "P") == 0 || strcmp(token, "Q") == 0 || strcmp(token, "R") == 0 || strcmp(token, "S") == 0 || strcmp(token, "T") == 0 || strcmp(token, "U") == 0 || strcmp(token, "V") == 0 || strcmp(token, "W") == 0 || strcmp(token, "X") == 0 || strcmp(token, "Y") == 0 || strcmp(token, "Z") == 0){
+		return 4;
 	}
 
 	return 0;
@@ -236,52 +238,9 @@ void parse(char *input)
 			}else{
 				PUSH(s, x);
 			}
+		}else if(token_type == 4){
+			VARIAVEIS(s, token);
 		}
-		else if(strcmp(token, "A") == 0)
-		{
-			PUSH_TYPE(s, 10, LONG);
-		}
-		else if(strcmp(token, "B") == 0)
-		{
-			PUSH_TYPE(s, 11, LONG);
-		}
-		else if(strcmp(token, "C") == 0)
-		{
-			PUSH_TYPE(s, 12, LONG);
-		}
-		else if(strcmp(token, "D") == 0)
-		{
-			PUSH_TYPE(s, 13, LONG);
-		}
-		else if(strcmp(token, "E") == 0)
-		{
-			PUSH_TYPE(s, 14, LONG);
-		}
-		else if(strcmp(token, "F") == 0)
-		{
-			PUSH_TYPE(s, 15, LONG);
-		}
-		else if(strcmp(token, "N") == 0)
-		{
-			PUSH_STRING(s, "\n");
-		}
-		else if(strcmp(token, "S") == 0)
-		{
-			PUSH_STRING(s, " ");
-		}
-		else if(strcmp(token, "X") == 0)
-		{
-			PUSH_TYPE(s, 0, LONG);
-		}
-		else if(strcmp(token, "Y") == 0)
-		{
-			PUSH_TYPE(s, 1, LONG);
-		}
-		else if(strcmp(token, "Z") == 0)
-		{
-			PUSH_TYPE(s, 2, LONG);
-		}
-		/*else if(strcmp(token, ":") == 0)*/
 	}
 	printStack(s);
 }
