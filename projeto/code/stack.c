@@ -243,32 +243,51 @@ void CONVERSAO(STACK *s, const char *token){
 }
 
 
+void PUSH_PROFUNDIDADE(STACK *s, int x, DATA y){
+	s->num = x;
+	s->array[s->num++] = y;
+}
+
+
 STACK *create_letter_array(){
 	
 	STACK *letras = (STACK *)malloc(sizeof(STACK));
-	assert(letras != NULL);
 	letras->num = 0;
 	letras->size = 26;
 	letras->array = (DATA *)calloc(letras->size, sizeof(DATA));
 
-	PUSH_LONG(letras, 10); 
+	PUSH_LONG(letras, 10);
 	PUSH_LONG(letras, 11);
 	PUSH_LONG(letras, 12);
 	PUSH_LONG(letras, 13);
 	PUSH_LONG(letras, 14);
 	PUSH_LONG(letras, 15);
-	letras->num = letras->num + 6;
-	PUSH_CHAR(letras, '\n');
-	letras->num += 3;
-	PUSH_CHAR(letras, ' ');
+
+	letras->num = 13;
+	double n = '\n';
+	PUSH_TYPE(letras, n, CHAR);
+
+	letras->num = 18;
+	double s = ' ';
+	PUSH_TYPE(letras, s, CHAR);
+
+	letras->num = 23;
+	double x = 0;
+	PUSH_TYPE(letras, x, LONG);
+
+	letras->num = 24;
+	double y = 1;
+	PUSH_TYPE(letras, y, LONG);
+
+	letras->num = 25;
+	double z = 2;
+	PUSH_TYPE(letras, z, LONG);
 
 	return letras;
 }
 
 
-void VARIAVEIS(STACK *s, const char *token){
-	
-	STACK *letras = create_letter_array();
+void VARIAVEIS(STACK *s, STACK *letras, const char *token){
 
 	if(strcmp(token, "A") == 0){
 		DATA x = letras->array[0];
@@ -289,13 +308,146 @@ void VARIAVEIS(STACK *s, const char *token){
 		DATA x = letras->array[5];
 		PUSH(s, x);
 	}else if(strcmp(token, "N") == 0){
-		DATA x = letras->array[11];
+		DATA x = letras->array[13];
 		PUSH(s, x);
 	}else if(strcmp(token, "S") == 0){
+		DATA x = letras->array[18];
+		PUSH(s, x);
+	}else if(strcmp(token, "X") == 0){
+		DATA x = letras->array[23];
+		PUSH(s, x);
+	}else if(strcmp(token, "Y") == 0){
+		DATA x = letras->array[24];
+		PUSH(s, x);
+	}else if(strcmp(token, "Z") == 0){
+		DATA x = letras->array[25];
+		PUSH(s, x);
+	}else if(strcmp(token, "G") == 0){
+		DATA x = letras->array[6];
+		PUSH(s, x);
+	}else if(strcmp(token, "H") == 0){
+		DATA x = letras->array[7];
+		PUSH(s, x);
+	}else if(strcmp(token, "I") == 0){
+		DATA x = letras->array[8];
+		PUSH(s, x);
+	}else if(strcmp(token, "J") == 0){
+		DATA x = letras->array[9];
+		PUSH(s, x);
+	}else if(strcmp(token, "K") == 0){
+		DATA x = letras->array[10];
+		PUSH(s, x);
+	}else if(strcmp(token, "L") == 0){
+		DATA x = letras->array[11];
+		PUSH(s, x);
+	}else if(strcmp(token, "M") == 0){
+		DATA x = letras->array[12];
+		PUSH(s, x);
+	}else if(strcmp(token, "O") == 0){
 		DATA x = letras->array[14];
 		PUSH(s, x);
+	}else if(strcmp(token, "P") == 0){
+		DATA x = letras->array[15];
+		PUSH(s, x);
+	}else if(strcmp(token, "Q") == 0){
+		DATA x = letras->array[16];
+		PUSH(s, x);
+	}else if(strcmp(token, "R") == 0){
+		DATA x = letras->array[17];
+		PUSH(s, x);
+	}else if(strcmp(token, "T") == 0){
+		DATA x = letras->array[19];
+		PUSH(s, x);
+	}else if(strcmp(token, "U") == 0){
+		DATA x = letras->array[20];
+		PUSH(s, x);
+	}else if(strcmp(token, "V") == 0){
+		DATA x = letras->array[21];
+		PUSH(s, x);
+	}else if(strcmp(token, "W") == 0){
+		DATA x = letras->array[22];
+		PUSH(s, x);
+	}else if(strcmp(token, ":A") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 0, x);
+	}else if(strcmp(token, ":B") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 1, x);
+	}else if(strcmp(token, ":C") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 2, x);
+	}else if(strcmp(token, ":D") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 3, x);
+	}else if(strcmp(token, ":E") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 4, x);
+	}else if(strcmp(token, ":F") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 5, x);
+	}else if(strcmp(token, ":G") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 6, x);
+	}else if(strcmp(token, ":H") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 7, x);
+	}else if(strcmp(token, ":I") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 8, x);
+	}else if(strcmp(token, ":J") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 9, x);
+	}else if(strcmp(token, ":K") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 10, x);
+	}else if(strcmp(token, ":L") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 11, x);
+	}else if(strcmp(token, ":M") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 12, x);
+	}else if(strcmp(token, ":N") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 13, x);
+	}else if(strcmp(token, ":O") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 14, x);
+	}else if(strcmp(token, ":P") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 15, x);
+	}else if(strcmp(token, ":Q") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 16, x);
+	}else if(strcmp(token, ":R") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 17, x);
+	}else if(strcmp(token, ":S") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 18, x);
+	}else if(strcmp(token, ":T") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 19, x);
+	}else if(strcmp(token, ":U") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 20, x);
+	}else if(strcmp(token, ":V") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 21, x);
+	}else if(strcmp(token, ":W") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 22, x);
+	}else if(strcmp(token, ":X") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 23, x);
+	}else if(strcmp(token, ":Y") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 24, x);
+	}else if(strcmp(token, ":Z") == 0){
+		DATA x = POP(s);
+		PUSH_PROFUNDIDADE(letras, 25, x);
 	}
 }
+
 
 /**
  * \brief Esta função imprime a STACK.

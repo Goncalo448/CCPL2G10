@@ -109,9 +109,11 @@ void CONVERTE_CHAR(STACK *s);
 
 void CONVERSAO(STACK *s, const char *token);
 
+void PUSH_PROFUNDIDADE(STACK *s, int x, DATA y);
+
 STACK *create_letter_array();
 
-void VARIAVEIS(STACK *s, const char *token);
+void VARIAVEIS(STACK *s, STACK *letras, const char *token);
 
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
