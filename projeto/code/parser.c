@@ -36,6 +36,8 @@ int verifica_token(char const *token){
 		return 4;
 	}else if(strcmp(token, "_") == 0 || strcmp(token, ";") == 0 || strcmp(token, "\\") == 0 || strcmp(token, "@") == 0 || strcmp(token, "$") == 0){
 		return 5;
+	}else if(strcmp(token, "=") == 0 || strcmp(token, "<") == 0 || strcmp(token, ">") == 0 || strcmp(token, "!") == 0 || strcmp(token, "e&") == 0 || strcmp(token, "e|") == 0 || strcmp(token, "e<") == 0 || strcmp(token, "e>") == 0 || strcmp(token, "?") == 0){
+		return 6;
 	}
 
 	return 0;
@@ -95,116 +97,12 @@ void parse(char *input)
 		{
 			COMANDOS_STACK(s, token);
 		}
-		else if(strcmp(token, "=") == 0)
+		else if(token_type == 6)
 		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vx == vy){
-				PUSH_TYPE(s, 1, LONG);
-			}else{
-				PUSH_TYPE(s, 0, LONG);
-			}
+			LOGICA(s, token);
 		}
-		else if(strcmp(token, "<") == 0)
+		else if(token_type == 4)
 		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vy < vx){
-				PUSH_TYPE(s, 1, LONG);
-			}else{
-				PUSH_TYPE(s, 0, LONG);
-			}
-		}
-		else if(strcmp(token, ">") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vy > vx){
-				PUSH_TYPE(s, 1, LONG);
-			}else{
-				PUSH_TYPE(s, 0, LONG);
-			}
-		}
-		else if(strcmp(token, "!") == 0)
-		{
-			DATA x = POP(s);
-			double vx = get_double(x);
-			if(vx == 0){
-				PUSH_TYPE(s, 1, LONG);
-			}else{
-				PUSH_TYPE(s, 0, LONG);
-			}
-		}
-		else if(strcmp(token, "e&") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vx && vy){
-				PUSH_LONG(s, max(vx,vy));
-			}else{
-				PUSH_TYPE(s, 0, LONG);
-			}
-		}
-		else if(strcmp(token, "e|") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vx == 0 && vy == 0){
-				PUSH_TYPE(s, 0, LONG);
-			}else if(vx == 0){
-				PUSH(s, y);
-			}else if(vy == 0){
-				PUSH(s, x);
-			}else{
-				PUSH_TYPE(s, max(vx,vy), DOUBLE);
-			}
-		}
-		else if(strcmp(token, "e<") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vy < vx){
-				PUSH_TYPE(s, vy, DOUBLE);
-			}else{
-				PUSH_TYPE(s, vx, DOUBLE);
-			}
-		}
-		else if(strcmp(token, "e>") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			double vx = get_double(x);
-			double vy = get_double(y);
-			if(vy > vx){
-				PUSH_TYPE(s, vy, DOUBLE);
-			}else{
-				PUSH_TYPE(s, vx, DOUBLE);
-			}
-		}
-		else if(strcmp(token, "?") == 0)
-		{
-			DATA x = POP(s);
-			DATA y = POP(s);
-			DATA z = POP(s);
-			double vz = get_double(z);
-			if(vz){
-				PUSH(s, y);
-			}else{
-				PUSH(s, x);
-			}
-		}else if(token_type == 4){
 			VARIAVEIS(s, letras, token);
 		}
 	}

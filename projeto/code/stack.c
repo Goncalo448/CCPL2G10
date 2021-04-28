@@ -503,6 +503,148 @@ void COMANDOS_STACK(STACK *s, const char *token){
 }
 
 
+void IGUAL(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vx == vy){
+		PUSH_TYPE(s, 1, LONG);
+	}else{
+		PUSH_TYPE(s, 0, LONG);
+	}
+}
+
+void MENOR(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vy < vx){
+		PUSH_TYPE(s, 1, LONG);
+	}else{
+		PUSH_TYPE(s, 0, LONG);
+	}
+}
+
+void MAIOR(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vy > vx){
+		PUSH_TYPE(s, 1, LONG);
+	}else{
+		PUSH_TYPE(s, 0, LONG);
+	}
+}
+
+void NEGACAO(STACK *s){
+
+	DATA x = POP(s);
+	double vx = get_double(x);
+	if(vx == 0){
+		PUSH_TYPE(s, 1, LONG);
+	}else{
+		PUSH_TYPE(s, 0, LONG);
+	}
+}
+
+void E(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vx && vy){
+		PUSH_LONG(s, max(vx,vy));
+	}else{
+		PUSH_TYPE(s, 0, LONG);
+	}
+}
+
+void OU(STACK *s){
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vx == 0 && vy == 0){
+		PUSH_TYPE(s, 0, LONG);
+	}else if(vx == 0){
+		PUSH(s, y);
+	}else if(vy == 0){
+		PUSH(s, x);
+	}else{
+		PUSH_TYPE(s, max(vx,vy), DOUBLE);
+	}
+}
+
+void MENOR_2_VALORES(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vy < vx){
+		PUSH_TYPE(s, vy, DOUBLE);
+	}else{
+		PUSH_TYPE(s, vx, DOUBLE);
+	}
+}
+
+void MAIOR_2_VALORES(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	double vx = get_double(x);
+	double vy = get_double(y);
+	if(vy > vx){
+		PUSH_TYPE(s, vy, DOUBLE);
+	}else{
+		PUSH_TYPE(s, vx, DOUBLE);
+	}
+}
+
+void IF_THEN_ELSE(STACK *s){
+
+	DATA x = POP(s);
+	DATA y = POP(s);
+	DATA z = POP(s);
+	double vz = get_double(z);
+	if(vz){
+		PUSH(s, y);
+	}else{
+		PUSH(s, x);
+	}
+}
+
+void LOGICA(STACK *s, const char *token){
+
+	if(strcmp(token, "=") == 0){
+		IGUAL(s);
+	}else if(strcmp(token, "<") == 0){
+		MENOR(s);
+	}else if(strcmp(token, ">") == 0){
+		MAIOR(s);
+	}else if(strcmp(token, "!") == 0){
+		NEGACAO(s);
+	}else if(strcmp(token, "e&") == 0){
+		E(s);
+	}else if(strcmp(token, "e|") == 0){
+		OU(s);
+	}else if(strcmp(token, "e<") == 0){
+		MENOR_2_VALORES(s);
+	}else if(strcmp(token, "e>") == 0){
+		MAIOR_2_VALORES(s);
+	}else if(strcmp(token, "?") == 0){
+		IF_THEN_ELSE(s);
+	}
+}
+
+
 /**
  * \brief Esta função imprime a STACK.
  */

@@ -125,6 +125,26 @@ void N_ESIMO_ELEMENTO(STACK *s);
 
 void COMANDOS_STACK(STACK *s, const char *token);
 
+void IGUAL(STACK *s);
+
+void MENOR(STACK *s);
+
+void MAIOR(STACK *s);
+
+void NEGACAO(STACK *s);
+
+void E(STACK *s);
+
+void OU(STACK *s);
+
+void MENOR_2_VALORES(STACK *s);
+
+void MAIOR_2_VALORES(STACK *s);
+
+void IF_THEN_ELSE(STACK *s);
+
+void LOGICA(STACK *s, const char *token);
+
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
