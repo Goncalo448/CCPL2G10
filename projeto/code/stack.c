@@ -368,83 +368,137 @@ void VARIAVEIS(STACK *s, STACK *letras, const char *token){
 		DATA x = letras->array[22];
 		PUSH(s, x);
 	}else if(strcmp(token, ":A") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 0, x);
 	}else if(strcmp(token, ":B") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 1, x);
 	}else if(strcmp(token, ":C") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 2, x);
 	}else if(strcmp(token, ":D") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 3, x);
 	}else if(strcmp(token, ":E") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 4, x);
 	}else if(strcmp(token, ":F") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 5, x);
 	}else if(strcmp(token, ":G") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 6, x);
 	}else if(strcmp(token, ":H") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 7, x);
 	}else if(strcmp(token, ":I") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 8, x);
 	}else if(strcmp(token, ":J") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 9, x);
 	}else if(strcmp(token, ":K") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 10, x);
 	}else if(strcmp(token, ":L") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 11, x);
 	}else if(strcmp(token, ":M") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 12, x);
 	}else if(strcmp(token, ":N") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 13, x);
 	}else if(strcmp(token, ":O") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 14, x);
 	}else if(strcmp(token, ":P") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 15, x);
 	}else if(strcmp(token, ":Q") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 16, x);
 	}else if(strcmp(token, ":R") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 17, x);
 	}else if(strcmp(token, ":S") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 18, x);
 	}else if(strcmp(token, ":T") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 19, x);
 	}else if(strcmp(token, ":U") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 20, x);
 	}else if(strcmp(token, ":V") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 21, x);
 	}else if(strcmp(token, ":W") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 22, x);
 	}else if(strcmp(token, ":X") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 23, x);
 	}else if(strcmp(token, ":Y") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 24, x);
 	}else if(strcmp(token, ":Z") == 0){
-		DATA x = POP(s);
+		DATA x = TOP(s);
 		PUSH_PROFUNDIDADE(letras, 25, x);
+	}
+}
+
+
+void DUPLICA(STACK *s){
+
+	DATA x = TOP(s);
+	POP(s);
+	PUSH(s, x);
+	PUSH(s, x);
+}
+
+void TROCA(STACK *s){
+
+	DATA x = TOP(s);
+	POP(s);
+	DATA y = TOP(s);
+	POP(s);
+	PUSH(s, x);
+	PUSH(s, y);
+}
+
+void RODA_ELEMENTOS(STACK *s){
+
+	DATA x = TOP(s);
+	POP(s);
+	DATA y = TOP(s);
+	POP(s);
+	DATA z = TOP(s);
+	POP(s);
+	PUSH(s, y);
+	PUSH(s, x);
+	PUSH(s, z);
+}
+
+void N_ESIMO_ELEMENTO(STACK *s){
+
+	long x = POP_LONG(s);
+	PUSH(s, profundidade(s, x+1));
+}
+
+
+void COMANDOS_STACK(STACK *s, const char *token){
+
+	if(strcmp(token, "_") == 0){
+		DUPLICA(s);
+	}else if(strcmp(token, ";") == 0){
+		POP(s);
+	}else if(strcmp(token, "\\") == 0){
+		TROCA(s);
+	}else if(strcmp(token, "@") == 0){
+		RODA_ELEMENTOS(s);
+	}else if(strcmp(token, "$") == 0){
+		N_ESIMO_ELEMENTO(s);
 	}
 }
 

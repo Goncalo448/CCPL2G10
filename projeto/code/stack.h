@@ -115,6 +115,16 @@ STACK *create_letter_array();
 
 void VARIAVEIS(STACK *s, STACK *letras, const char *token);
 
+void DUPLICA(STACK *s);
+
+void TROCA(STACK *s);
+
+void RODA_ELEMENTOS(STACK *s);
+
+void N_ESIMO_ELEMENTO(STACK *s);
+
+void COMANDOS_STACK(STACK *s, const char *token);
+
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
