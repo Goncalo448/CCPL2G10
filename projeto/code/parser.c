@@ -9,20 +9,23 @@
 #include <stdbool.h>
 #include "parser.h"
 #include "stack.h"
-
-
 /**
- * \brief Esta função faz o parse do input.
- *
- * @param line O input que foi lido ao qual vai ser aplicado o parse.
- * 
- * 
+ * \brief Esta macro calcula o maior entre dois valores
  */
-
 
 #define max(x,y)	((x) > (y)) ? (x) : (y)
 
+/**
+ * \brief Esta macro calcula o menor entre dois valores
+ */
+
 #define min(x,y)    ((x) < (y)) ? (x) : (y)
+
+/**
+ * \brief Esta função retorna um inteiro que indica qual o tipo de operações o programa vai executar
+ * 
+ * @returns O valor que indica qual o tipo de operações
+ */
 
 int verifica_token(char const *token){
 
@@ -43,6 +46,11 @@ int verifica_token(char const *token){
 	return 0;
 }
 
+/**
+ * \brief Esta função faz o parse do input.
+ *
+ * @param line O input que foi lido ao qual vai ser aplicado o parse.
+ */
 
 void parse(char *input)
 {
