@@ -25,12 +25,20 @@ STACK *createStack()
 	return s;
 }
 
+/**
+ * \brief Esta função verifica se um dado elemento da stack é de um certo tipo
+ *
+ * @returns Retorna 1 ou 0
+ */
 
 int hasType(DATA x, int mask)
 {
 	return (x.type & mask) != 0;
 }
 
+/**
+ * \brief Esta função coloca um dado elemento no topo da stack
+ */
 
 void PUSH(STACK *s, DATA x)
 {
@@ -43,13 +51,21 @@ void PUSH(STACK *s, DATA x)
 	s->num++;
 }
 
+/**
+ * \brief Esta função apaga o topo da stack
+ *
+ * @returns Retorna um DATA
+ */
+
 DATA POP(STACK *s){
 	s->num--;
 	return s->array[s->num];
 }
 
 /**
- * \brief Esta função pega no valor que está no topo da STACK.
+ * \brief Esta função retorna o valor que está no topo da STACK.
+ * 
+ * @returns Retorna um DATA
  */
 
 DATA TOP(STACK *s)
@@ -57,19 +73,36 @@ DATA TOP(STACK *s)
 	return s->array[s->num-1];
 }
 
+/**
+ * \brief Esta função retorna o valor que se encontra numa dada profundidade da stack
+ * 
+ * @returns Retorna um DATA
+ */
+
 DATA profundidade(STACK *s, int x){
 	return s->array[s->num-x];
 }
 
+/**
+ * \brief Esta função verifica se a stack está vazia
+ * 
+ * @returns Retorna um int
+ */
 
 int isEmpty(STACK *s){
 
 	return s->num == 0;
 }
 
+/**
+ * \brief Esta macro calcula o maior entre dois valores
+ */
 
 #define max(x,y)	((x) > (y)) ? (x) : (y)
 
+/**
+ * \brief Esta função soma os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
 
 void SOMA(STACK *s){
 	DATA x = POP(s);
@@ -80,6 +113,9 @@ void SOMA(STACK *s){
 	PUSH_TYPE(s, vy+vx, ret_t);
 }
 
+/**
+ * \brief Esta função subtrai os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
 
 void SUBTRACAO(STACK *s){
 	DATA x = POP(s);
@@ -90,6 +126,9 @@ void SUBTRACAO(STACK *s){
 	PUSH_TYPE(s, vy-vx, ret_t);
 }
 
+/**
+ * \brief Esta função multiplica os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
 
 void MULTIPLICACAO(STACK *s){
 	DATA x = POP(s);
@@ -100,6 +139,9 @@ void MULTIPLICACAO(STACK *s){
 	PUSH_TYPE(s, vy*vx, ret_t);
 }
 
+/**
+ * \brief Esta função divide os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
 
 void DIVISAO(STACK *s){
 	DATA x = POP(s);
@@ -110,6 +152,9 @@ void DIVISAO(STACK *s){
 	PUSH_TYPE(s, vy/vx, ret_t);
 }
 
+/**
+ * \brief Esta função vai executar uma operação aritmetica conforme o sinal que esteja no token
+ */
 
 void ARITMETICA(STACK *s, const char *token){
 	if(strcmp(token, "+") == 0){
@@ -123,6 +168,9 @@ void ARITMETICA(STACK *s, const char *token){
 	}
 }
 
+/**
+ * \brief Esta função decrementa o valor que está no topo da stack
+ */
 
 void DECREMENT(STACK *s){
 	DATA x = POP(s);
@@ -131,12 +179,20 @@ void DECREMENT(STACK *s){
 	PUSH_TYPE(s, vx-1, ret_t);
 }
 
+/**
+ * \brief Esta função decrementa o valor que está no topo da stack
+ */
+
 void INCREMENT(STACK *s){
 	DATA x = POP(s);
 	TYPE ret_t = x.type;
 	double vx = get_double(x);
 	PUSH_TYPE(s, vx+1, ret_t);
 }
+
+/**
+ * \brief Esta função calcula o resto da divisao dos dois valores do topo da stack
+ */
 
 void MODULO(STACK *s){
 	DATA x = POP(s);
@@ -147,6 +203,10 @@ void MODULO(STACK *s){
 	PUSH_TYPE(s, vy%vx, ret_t);
 }
 
+/**
+ * \brief Esta função calcula o topo da stack elevado ao segundo elemento da stack
+ */
+
 void EXPOENTE(STACK *s){
 	DATA x = POP(s);
 	DATA y = POP(s);
@@ -154,6 +214,10 @@ void EXPOENTE(STACK *s){
 	double vy = get_double(y);
 	PUSH_TYPE(s, pow(vy, vx), DOUBLE);
 }
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void MAT(STACK *s, const char *token){
 	if(strcmp(token, "(") == 0){
@@ -167,6 +231,10 @@ void MAT(STACK *s, const char *token){
 	}
 }
 
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
+
 void AND(STACK *s){
 	DATA x = POP(s);
 	DATA y = POP(s);
@@ -175,6 +243,10 @@ void AND(STACK *s){
 	long vy = get_double(y);
 	PUSH_TYPE(s, vx&vy, ret_t);
 }
+
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
 
 void OR(STACK *s){
 	DATA x = POP(s);
@@ -185,6 +257,10 @@ void OR(STACK *s){
 	PUSH_TYPE(s, vx|vy, ret_t);
 }
 
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
+
 void XOR(STACK *s){
 	DATA x = POP(s);
 	DATA y = POP(s);
@@ -194,12 +270,20 @@ void XOR(STACK *s){
 	PUSH_TYPE(s, vx^vy, ret_t);
 }
 
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
+
 void NOT(STACK *s){
 	DATA x = POP(s);
 	TYPE ret_t = x.type;
 	long vx = get_double(x);
 	PUSH_TYPE(s, ~vx, ret_t);
 }
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void BITWISE(STACK *s, const char *token){
 	if(strcmp(token, "&")==0){
@@ -213,6 +297,9 @@ void BITWISE(STACK *s, const char *token){
 	}
 }
 
+/**
+ * \brief Esta função converte o topo da stack num inteiro
+ */
 
 void CONVERTE_INT(STACK *s){
 	DATA x = POP(s);
@@ -220,17 +307,29 @@ void CONVERTE_INT(STACK *s){
 	PUSH_TYPE(s, vx, LONG);
 }
 
+/**
+ * \brief Esta função converte o topo da stack num float
+ */
+
 void CONVERTE_FLOAT(STACK *s){
 	DATA x = POP(s);
 	double vx = get_double(x);
 	PUSH_TYPE(s, vx, DOUBLE);
 }
 
+/**
+ * \brief Esta função converte o topo da stack num char
+ */
+
 void CONVERTE_CHAR(STACK *s){
 	DATA x = POP(s);
 	char vx = get_double(x);
 	PUSH_TYPE(s, vx, CHAR);
 }
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void CONVERSAO(STACK *s, const char *token){
 	if(strcmp(token, "i") == 0){
@@ -242,12 +341,20 @@ void CONVERSAO(STACK *s, const char *token){
 	}
 }
 
+/**
+ * \brief Esta função coloca um elemento numa determinada profundidade da stack
+ */
 
 void PUSH_PROFUNDIDADE(STACK *s, int x, DATA y){
 	s->num = x;
 	s->array[s->num++] = y;
 }
 
+/**
+ * \brief Esta função cria uma STACK de letras em que algumas delas têm valores predefinidos.
+ *
+ * @returns Retorna uma STACK de letras
+ */
 
 STACK *create_letter_array(){
 	
@@ -285,6 +392,10 @@ STACK *create_letter_array(){
 
 	return letras;
 }
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 
 void VARIAVEIS(STACK *s, STACK *letras, const char *token){
@@ -448,6 +559,9 @@ void VARIAVEIS(STACK *s, STACK *letras, const char *token){
 	}
 }
 
+/**
+ * \brief Esta função duplica o valor do top da stack
+ */
 
 void DUPLICA(STACK *s){
 
@@ -456,6 +570,10 @@ void DUPLICA(STACK *s){
 	PUSH(s, x);
 	PUSH(s, x);
 }
+
+/**
+ * \brief Esta função troca os dois valores que estão no topo da stack
+ */
 
 void TROCA(STACK *s){
 
@@ -466,6 +584,10 @@ void TROCA(STACK *s){
 	PUSH(s, x);
 	PUSH(s, y);
 }
+
+/**
+ * \brief Esta função roda os três elemento que estão no topo da stack
+ */
 
 void RODA_ELEMENTOS(STACK *s){
 
@@ -480,12 +602,19 @@ void RODA_ELEMENTOS(STACK *s){
 	PUSH(s, z);
 }
 
+/**
+ * \brief Esta função coloca o elemento que se encontra numa determinada posiçao no topo da stack
+ */
+
 void N_ESIMO_ELEMENTO(STACK *s){
 
 	long x = POP_LONG(s);
 	PUSH(s, profundidade(s, x+1));
 }
 
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void COMANDOS_STACK(STACK *s, const char *token){
 
@@ -502,6 +631,9 @@ void COMANDOS_STACK(STACK *s, const char *token){
 	}
 }
 
+/**
+ * \brief Esta função verifica se os dois elementos do topo da stack sao iguais e coloca no topo da stack 0 ou 1 conforme o valor logico
+ */ 
 
 void IGUAL(STACK *s){
 
@@ -516,6 +648,10 @@ void IGUAL(STACK *s){
 	}
 }
 
+/**
+ * \brief Esta função verifica se o segundo elemento da stack e menor do que primeiro elemento da stack e coloca no topo da stack 0 ou 1 conforme o valor logico
+ */
+
 void MENOR(STACK *s){
 
 	DATA x = POP(s);
@@ -528,6 +664,10 @@ void MENOR(STACK *s){
 		PUSH_TYPE(s, 0, LONG);
 	}
 }
+
+/**
+ * \brief Esta função verifica se o segundo elemento da stack e maior do que primeiro elemento da stack e coloca no topo da stack 0 ou 1 conforme o valor logico
+ */
 
 void MAIOR(STACK *s){
 
@@ -542,6 +682,10 @@ void MAIOR(STACK *s){
 	}
 }
 
+/**
+ * \brief Esta função calcula o valor logico da negacao do topo da stack
+ */
+
 void NEGACAO(STACK *s){
 
 	DATA x = POP(s);
@@ -552,6 +696,10 @@ void NEGACAO(STACK *s){
 		PUSH_TYPE(s, 0, LONG);
 	}
 }
+
+/**
+ * \brief Esta função faz a conjunção entre dois valores. Se os dois valores forem verdadeiros coloca o maior no topo da stack se não coloca 0
+ */
 
 void E(STACK *s){
 
@@ -565,6 +713,10 @@ void E(STACK *s){
 		PUSH_TYPE(s, 0, LONG);
 	}
 }
+
+/**
+ * \brief Esta função faz a dijunção entre dois valores. Se os dois valores forem verdadeiros coloca o menor no topo da stack se não coloca o maior
+ */
 
 void OU(STACK *s){
 	DATA x = POP(s);
@@ -582,6 +734,10 @@ void OU(STACK *s){
 	}
 }
 
+/**
+ * \brief Esta função coloca o menor dos 2 valores na stack
+ */
+
 void MENOR_2_VALORES(STACK *s){
 
 	DATA x = POP(s);
@@ -594,6 +750,10 @@ void MENOR_2_VALORES(STACK *s){
 		PUSH_TYPE(s, vx, DOUBLE);
 	}
 }
+
+/**
+ * \brief Esta função coloca o maior dos 2 valores na stack
+ */
 
 void MAIOR_2_VALORES(STACK *s){
 
@@ -608,6 +768,10 @@ void MAIOR_2_VALORES(STACK *s){
 	}
 }
 
+/**
+ * \brief Esta função verifica o valor logico do topo da stack. Se o valor for verdeiro coloca o segundo elemento da stack no topo da stack se não coloca o terceiro
+ */
+
 void IF_THEN_ELSE(STACK *s){
 
 	DATA x = POP(s);
@@ -620,6 +784,10 @@ void IF_THEN_ELSE(STACK *s){
 		PUSH(s, x);
 	}
 }
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void LOGICA(STACK *s, const char *token){
 
@@ -648,6 +816,7 @@ void LOGICA(STACK *s, const char *token){
 /**
  * \brief Esta função imprime a STACK.
  */
+
 void printStack(STACK *s)
 {
 #define SEP ""
@@ -674,6 +843,9 @@ void printStack(STACK *s)
 	printf("\n");
 }
 
+/**
+ * \brief Esta macro serve para executar as funçoes PUSH e POP para um tipo de dados desejado
+ */
 
 #define STACK_OPERATION(_type, _name)        \
 	void PUSH_##_name(STACK *s, _type val){  \
@@ -688,6 +860,9 @@ void printStack(STACK *s)
 		return elemento._name;               \
 	}
 
+/**
+ * \brief Esta função executa o push de um elemento com um determinado tipo
+ */
 
 void PUSH_TYPE(STACK *s, double val, TYPE t){
 	DATA elemento;
@@ -708,6 +883,12 @@ void PUSH_TYPE(STACK *s, double val, TYPE t){
 	}
 	PUSH(s, elemento);
 }
+
+/**
+ * \brief Esta função converte um DATA em DOUBLE
+ * 
+ * @returns Retorna um DOUBLE
+ */
 
 double get_double(DATA elemento){
 	switch(elemento.type){
