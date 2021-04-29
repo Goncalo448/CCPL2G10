@@ -46,6 +46,13 @@ int verifica_token(char const *token){
 	return 0;
 }
 
+
+/*char *get_token(char *line, char **rest){
+
+	char *delims = "\t\n";
+	char 
+}*/
+
 /**
  * \brief Esta função faz o parse do input.
  *
