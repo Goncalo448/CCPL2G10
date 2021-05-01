@@ -43,18 +43,47 @@ typedef struct stack
  */
 STACK *createStack();
 
+/**
+ * \brief Esta função verifica se um dado elemento da stack é de um certo tipo
+ *
+ * @returns Retorna 1 ou 0
+ */
+
 int hasType(DATA x, int mask);
 
+/**
+ * \brief Esta função coloca um dado elemento no topo da stack
+ */
+
 void PUSH(STACK *s, DATA x);
+
+/**
+ * \brief Esta função apaga o topo da stack
+ *
+ * @returns Retorna um DATA
+ */
 
 DATA POP(STACK *s);
 
 /**
  * \brief Função que pega o valor que está no topo da STACK.
  */
+
 DATA TOP(STACK *s);
 
+/**
+ * \brief Esta função retorna o valor que se encontra numa dada profundidade da stack
+ * 
+ * @returns Retorna um DATA
+ */
+
 DATA profundidade(STACK *s, int x);
+
+/**
+ * \brief Esta função verifica se a stack está vazia
+ * 
+ * @returns Retorna um int
+ */
 
 int isEmpty(STACK *s);
 
