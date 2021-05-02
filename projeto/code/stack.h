@@ -174,6 +174,10 @@ void IF_THEN_ELSE(STACK *s);
 
 void LOGICA(STACK *s, const char *token);
 
+char *CREATE_STRING(const char *token);
+
+STACK *CREATE_ARRAY();
+
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \

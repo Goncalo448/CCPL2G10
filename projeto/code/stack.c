@@ -813,16 +813,23 @@ void LOGICA(STACK *s, const char *token){
 }
 
 
-void CREATE_STRING(STACK *s, const char *token){
+char *CREATE_STRING(const char *token){
 
-	char str[50];
 	char *tokencpy;
 
-	*tokencpy = strdup(token);
+	tokencpy = strdup(token);
 
-	while(*tokencpy){
-		
-	}
+	return tokencpy;
+}
+
+STACK *CREATE_ARRAY(){
+
+	STACK *arr = (STACK *)malloc(sizeof(STACK));
+	arr->num = 0;
+	arr->size = 50;
+	arr->array = (DATA *)calloc(arr->size, sizeof(DATA));
+
+	return arr;
 }
 
 

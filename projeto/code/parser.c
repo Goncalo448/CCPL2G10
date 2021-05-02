@@ -120,6 +120,10 @@ void parse(char *input)
 		{
 			VARIAVEIS(s, letras, token);
 		}
+		/*else if(strcmp(token, """") == 0)
+		{
+			PUSH_STRING(s, CREATE_STRING(token));
+		}*/
 	}
 	printStack(s);
 }
