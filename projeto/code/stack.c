@@ -813,14 +813,17 @@ void LOGICA(STACK *s, const char *token){
 }
 
 
-/*void CREATE_STRING(STACK *s, char *token){
+void CREATE_STRING(STACK *s, const char *token){
 
 	char str[50];
-	int i = 0;
-	while(*token != NULL){
-		str[i] = *token;
+	char *tokencpy;
+
+	*tokencpy = strdup(token);
+
+	while(*tokencpy){
+		
 	}
-}*/
+}
 
 
 /**
