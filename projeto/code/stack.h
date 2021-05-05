@@ -12,7 +12,8 @@ typedef enum
 	LONG = 2,
 	DOUBLE = 4,
 	CHAR = 1,
-	STRING = 8
+	STRING = 8,
+	ARRAY = 16,
 } TYPE;
 
 
@@ -27,6 +28,7 @@ typedef struct data
 	double DOUBLE;
 	char CHAR;
 	char *STRING;
+	struct data *ARRAY;
 } DATA;
 
 
@@ -338,5 +340,6 @@ STACK_OPERATION_PROTO(long, LONG)
 STACK_OPERATION_PROTO(double, DOUBLE)
 STACK_OPERATION_PROTO(char, CHAR)
 STACK_OPERATION_PROTO(char *, STRING)
+STACK_OPERATION_PROTO(struct data *, ARRAY)
 
 #endif

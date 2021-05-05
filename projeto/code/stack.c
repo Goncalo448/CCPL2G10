@@ -830,32 +830,24 @@ char *CREATE_STRING(const char *token){
 	return tokencpy;
 }
 
-STACK *CREATE_ARRAY(){
 
-	STACK *arr = (STACK *)malloc(sizeof(STACK));
-	arr->num = 0;
-	arr->size = 50;
-	arr->array = (DATA *)calloc(arr->size, sizeof(DATA));
-
-	return arr;
+void CREATE_ARRAY(STACK *s, const char *token){
+	
 }
 
 
-void COLOCA_ARRAY_STACK(STACK *s, STACK *arr){
+void COLOCA_ARRAY_STACK(STACK *s){
+	DATA arr = POP(s);
 
-	int i = 0;
-
-	while(arr->array[i]){
-		PUSH(s, arr->array[i]);
-		i++;
-	}
 }
 
 
 //void CONCAT_STRING_ARRAYS(STACK *s, )
 
 
-void BUSCA_POR_INDICE
+void BUSCA_POR_INDICE(STACK *s){
+	DATA ind = POP(s);
+}
 
 
 /**
@@ -883,6 +875,12 @@ void printStack(STACK *s)
 		case STRING:
 			printf(SEP"%s", x.STRING);
 			break;
+		case *ARRAY:
+			printf("[ ");
+			int i = 0;
+			while((*ARRAY)->array[i]){
+				printf("")
+			}
 		}
 	}
 	printf("\n");
@@ -959,3 +957,4 @@ STACK_OPERATION(long, LONG)
 STACK_OPERATION(double, DOUBLE)
 STACK_OPERATION(char, CHAR)
 STACK_OPERATION(char *, STRING)
+STACK_OPERATION(struct data *, ARRAY)
