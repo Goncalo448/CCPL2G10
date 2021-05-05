@@ -87,6 +87,11 @@ DATA profundidade(STACK *s, int x);
 
 int isEmpty(STACK *s);
 
+/**
+ * \brief Esta função converte um DATA em DOUBLE
+ * 
+ * @returns Retorna um DOUBLE
+ */
 double get_double(DATA elemento);
 
 void PUSH_TYPE(STACK *s, double val, TYPE t);
@@ -96,81 +101,227 @@ void PUSH_TYPE(STACK *s, double val, TYPE t);
  */
 void printStack(STACK *s);
 
+/**
+ * \brief Esta função soma os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
 
 void SOMA(STACK *s);
 
+/**
+ * \brief Esta função subtrai os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
+
 void SUBTRACAO(STACK *s);
+
+/**
+ * \brief Esta função multiplica os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
 
 void MULTIPLICACAO(STACK *s);
 
+/**
+ * \brief Esta função divide os dois valores que estão no topo da stack e coloca o resultado no topo da stack
+ */
+
 void DIVISAO(STACK *s);
 
+/**
+ * \brief Esta função vai executar uma operação aritmetica conforme o sinal que esteja no token
+ */
 
 void ARITMETICA(STACK *s, const char *token);
 
+/**
+ * \brief Esta função decrementa o valor que está no topo da stack
+ */
 
 void DECREMENT(STACK *s);
 
+/**
+ * \brief Esta função decrementa o valor que está no topo da stack
+ */
+
 void INCREMENT(STACK *s);
+
+/**
+ * \brief Esta função calcula o resto da divisao dos dois valores do topo da stack
+ */
 
 void MODULO(STACK *s);
 
+/**
+ * \brief Esta função calcula o topo da stack elevado ao segundo elemento da stack
+ */
+
 void EXPOENTE(STACK *s);
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void MAT(STACK *s, const char *token);
 
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
+
 void AND(STACK *s);
+
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
 
 void OR(STACK *s);
 
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
+
 void XOR(STACK *s);
+
+/**
+ * \brief Esta função compara os bits de cada elemento da stack
+ */
 
 void NOT(STACK *s);
 
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
+
 void BITWISE(STACK *s, const char *token);
 
+/**
+ * \brief Esta função converte o topo da stack num inteiro
+ */
 
 void CONVERTE_INT(STACK *s);
 
+/**
+ * \brief Esta função converte o topo da stack num float
+ */
+
 void CONVERTE_FLOAT(STACK *s);
+
+/**
+ * \brief Esta função converte o topo da stack num char
+ */
 
 void CONVERTE_CHAR(STACK *s);
 
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
+
 void CONVERSAO(STACK *s, const char *token);
+
+/**
+ * \brief Esta função coloca um elemento numa determinada profundidade da stack
+ */
 
 void PUSH_PROFUNDIDADE(STACK *s, int x, DATA y);
 
+/**
+ * \brief Esta função cria uma STACK de letras em que algumas delas têm valores predefinidos.
+ *
+ * @returns Retorna uma STACK de letras
+ */
+
 STACK *create_letter_array();
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void VARIAVEIS(STACK *s, STACK *letras, const char *token);
 
+/**
+ * \brief Esta função duplica o valor do top da stack
+ */
+
 void DUPLICA(STACK *s);
+
+/**
+ * \brief Esta função troca os dois valores que estão no topo da stack
+ */
 
 void TROCA(STACK *s);
 
+/**
+ * \brief Esta função roda os três elemento que estão no topo da stack
+ */
+
 void RODA_ELEMENTOS(STACK *s);
+
+/**
+ * \brief Esta função coloca o elemento que se encontra numa determinada posiçao no topo da stack
+ */
 
 void N_ESIMO_ELEMENTO(STACK *s);
 
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
+
 void COMANDOS_STACK(STACK *s, const char *token);
+
+/**
+ * \brief Esta função verifica se os dois elementos do topo da stack sao iguais e coloca no topo da stack 0 ou 1 conforme o valor logico
+ */ 
 
 void IGUAL(STACK *s);
 
+/**
+ * \brief Esta função verifica se o segundo elemento da stack e menor do que primeiro elemento da stack e coloca no topo da stack 0 ou 1 conforme o valor logico
+ */
+
 void MENOR(STACK *s);
+
+/**
+ * \brief Esta função verifica se o segundo elemento da stack e maior do que primeiro elemento da stack e coloca no topo da stack 0 ou 1 conforme o valor logico
+ */
 
 void MAIOR(STACK *s);
 
+/**
+ * \brief Esta função calcula o valor logico da negacao do topo da stack
+ */
+
 void NEGACAO(STACK *s);
+
+/**
+ * \brief Esta função faz a conjunção entre dois valores. Se os dois valores forem verdadeiros coloca o maior no topo da stack se não coloca 0
+ */
 
 void E(STACK *s);
 
+/**
+ * \brief Esta função faz a dijunção entre dois valores. Se os dois valores forem verdadeiros coloca o menor no topo da stack se não coloca o maior
+ */
+
 void OU(STACK *s);
+
+/**
+ * \brief Esta função coloca o menor dos 2 valores na stack
+ */
 
 void MENOR_2_VALORES(STACK *s);
 
+/**
+ * \brief Esta função coloca o maior dos 2 valores na stack
+ */
+
 void MAIOR_2_VALORES(STACK *s);
 
+/**
+ * \brief Esta função verifica o valor logico do topo da stack. Se o valor for verdeiro coloca o segundo elemento da stack no topo da stack se não coloca o terceiro
+ */
+
 void IF_THEN_ELSE(STACK *s);
+
+/**
+ * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ */
 
 void LOGICA(STACK *s, const char *token);
 
