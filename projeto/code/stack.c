@@ -397,7 +397,6 @@ STACK *create_letter_array(){
  * \brief Esta função determina qual a operação que o programa vai executar conforme o token
  */
 
-
 void VARIAVEIS(STACK *s, STACK *letras, const char *token){
 
 	if(strcmp(token, "A") == 0){
