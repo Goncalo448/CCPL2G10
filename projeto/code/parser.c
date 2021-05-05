@@ -122,7 +122,7 @@ void parse(char *input)
 		}
 		/*else if(strcmp(token, """") == 0)
 		{
-			PUSH_STRING(s, CREATE_STRING(token));
+			PUSH_STRING(s, *CREATE_STRING(token));
 		}*/
 	}
 	printStack(s);

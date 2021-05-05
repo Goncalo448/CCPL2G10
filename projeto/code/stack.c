@@ -327,6 +327,15 @@ void CONVERTE_CHAR(STACK *s){
 	PUSH_TYPE(s, vx, CHAR);
 }
 
+
+/*void CONVERTE_STRING(STACK *s){
+	DATA x = POP(s);
+	DATA str[50];
+	for(int i = 0; i < 50; i++){
+		str[i] = 
+	}
+}*/
+
 /**
  * \brief Esta função determina qual a operação que o programa vai executar conforme o token
  */
@@ -831,6 +840,23 @@ STACK *CREATE_ARRAY(){
 
 	return arr;
 }
+
+
+void COLOCA_ARRAY_STACK(STACK *s, STACK *arr){
+
+	int i = 0;
+
+	while(arr->array[i]){
+		PUSH(s, arr->array[i]);
+		i++;
+	}
+}
+
+
+//void CONCAT_STRING_ARRAYS(STACK *s, )
+
+
+void BUSCA_POR_INDICE
 
 
 /**
