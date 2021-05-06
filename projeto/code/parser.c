@@ -47,11 +47,22 @@ int verifica_token(char const *token){
 }
 
 
-/*char *get_token(char *line, char **rest){
+char *get_token(char *line, char **rest){
+	char *s = line;
 
-	char *delims = "\t\n";
-	char 
-}*/
+	if(*s != " " || *s != "\n" || *s != "\t"){
+		while(*s != " "){
+			s++;
+		}
+		return s;
+	}
+	if(*s == " " || *s == "\n" || *s == "\t"){
+		while(*s == " " || *s == "\t" || *s == "\n"){
+			s++;
+		}
+		return s;
+	}
+}
 
 /**
  * \brief Esta função faz o parse do input.

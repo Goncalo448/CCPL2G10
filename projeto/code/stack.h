@@ -28,7 +28,7 @@ typedef struct data
 	double DOUBLE;
 	char CHAR;
 	char *STRING;
-	struct data *ARRAY;
+	struct stack* ARRAY;
 } DATA;
 
 
@@ -329,7 +329,11 @@ void LOGICA(STACK *s, const char *token);
 
 char *CREATE_STRING(const char *token);
 
-STACK *CREATE_ARRAY();
+void CREATE_ARRAY(STACK *s, const char *token);
+
+void COLOCA_ARRAY_STACK(STACK *s);
+
+void BUSCA_POR_INDICE(STACK *s);
 
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
@@ -340,6 +344,6 @@ STACK_OPERATION_PROTO(long, LONG)
 STACK_OPERATION_PROTO(double, DOUBLE)
 STACK_OPERATION_PROTO(char, CHAR)
 STACK_OPERATION_PROTO(char *, STRING)
-STACK_OPERATION_PROTO(struct data *, ARRAY)
+STACK_OPERATION_PROTO(struct stack *, ARRAY)
 
 #endif

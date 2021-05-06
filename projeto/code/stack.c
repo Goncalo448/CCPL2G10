@@ -821,33 +821,34 @@ void LOGICA(STACK *s, const char *token){
 }
 
 
-char *CREATE_STRING(const char *token){
-
-	char *tokencpy;
-
-	tokencpy = strdup(token);
-
-	return tokencpy;
+void *CREATE_STRING(const char *token){
+	PUSH_STRING(s, token);
 }
 
 
 void CREATE_ARRAY(STACK *s, const char *token){
-	
+	PUSH_ARRAY(s, token);
 }
 
 
 void COLOCA_ARRAY_STACK(STACK *s){
-	DATA arr = POP(s);
-
+	struct stack *arr = POP_ARRAY(s);
+	int i = 0;
+	while(*arr->array[i]){
+		DATA x = POP(arr);
+		PUSH(s, x);
+	}
 }
-
-
-//void CONCAT_STRING_ARRAYS(STACK *s, )
 
 
 void BUSCA_POR_INDICE(STACK *s){
 	DATA ind = POP(s);
+	struct stack *arr = POP(s);
+	PUSH(s, *arr->array[ind]);
 }
+
+
+
 
 
 /**
@@ -875,12 +876,6 @@ void printStack(STACK *s)
 		case STRING:
 			printf(SEP"%s", x.STRING);
 			break;
-		case *ARRAY:
-			printf("[ ");
-			int i = 0;
-			while((*ARRAY)->array[i]){
-				printf("")
-			}
 		}
 	}
 	printf("\n");
@@ -946,6 +941,7 @@ double get_double(DATA elemento){
 			break;
 		case STRING:
 			return atof(elemento.STRING);
+			break;
 		default:
 			assert(0 && "tou a tentar converter um DATA noutra coisa qualquer");
 			break;
@@ -957,4 +953,4 @@ STACK_OPERATION(long, LONG)
 STACK_OPERATION(double, DOUBLE)
 STACK_OPERATION(char, CHAR)
 STACK_OPERATION(char *, STRING)
-STACK_OPERATION(struct data *, ARRAY)
+STACK_OPERATION(struct stack *, ARRAY)
