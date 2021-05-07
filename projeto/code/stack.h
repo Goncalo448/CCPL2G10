@@ -327,7 +327,9 @@ void IF_THEN_ELSE(STACK *s);
 
 void LOGICA(STACK *s, const char *token);
 
-char *CREATE_STRING(const char *token);
+void CREATE_STRING(STACK *s, const char *token);
+
+void PUSH_TO_ARRAY(STACK *s, char *str);
 
 void CREATE_ARRAY(STACK *s, const char *token);
 

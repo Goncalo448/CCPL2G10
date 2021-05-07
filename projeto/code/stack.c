@@ -821,30 +821,38 @@ void LOGICA(STACK *s, const char *token){
 }
 
 
-void *CREATE_STRING(const char *token){
-	PUSH_STRING(s, token);
+void CREATE_STRING(STACK *s, const char *token){
+	char *tokencpy = strdup(token);
+	PUSH_STRING(s, tokencpy);
+}
+
+
+void PUSH_TO_ARRAY(STACK *s, char *str){
+	s->ARRAY->array[s->ARRAY->num++] = str;
 }
 
 
 void CREATE_ARRAY(STACK *s, const char *token){
-	PUSH_ARRAY(s, token);
+	char *tokencpy = strdup(token);
+	PUSH_TO_ARRAY(s, tokencpy);
 }
 
 
 void COLOCA_ARRAY_STACK(STACK *s){
 	struct stack *arr = POP_ARRAY(s);
 	int i = 0;
-	while(*arr->array[i]){
+	while(&(arr->array[i])){
 		DATA x = POP(arr);
 		PUSH(s, x);
+		i++;
 	}
 }
 
 
 void BUSCA_POR_INDICE(STACK *s){
-	DATA ind = POP(s);
-	struct stack *arr = POP(s);
-	PUSH(s, *arr->array[ind]);
+	long ind = POP_LONG(s);
+	struct stack *arr = POP_ARRAY(s);
+	PUSH(s, arr->array[ind]);
 }
 
 
@@ -875,6 +883,9 @@ void printStack(STACK *s)
 			break;
 		case STRING:
 			printf(SEP"%s", x.STRING);
+			break;
+		case ARRAY:
+			printStack(STACK );
 			break;
 		}
 	}

@@ -41,13 +41,15 @@ int verifica_token(char const *token){
 		return 5;
 	}else if(strcmp(token, "=") == 0 || strcmp(token, "<") == 0 || strcmp(token, ">") == 0 || strcmp(token, "!") == 0 || strcmp(token, "e&") == 0 || strcmp(token, "e|") == 0 || strcmp(token, "e<") == 0 || strcmp(token, "e>") == 0 || strcmp(token, "?") == 0){
 		return 6;
+	}else if(strcmp(token, "[") == 0 || strcmp(token, "]") == 0 || strcmp(token, "~") == 0 || strcmp(token, "=") == 0){
+		return 7;
 	}
 
 	return 0;
 }
 
 
-char *get_token(char *line, char **rest){
+/*char *get_token(char *line, char **rest){
 	char *s = line;
 
 	if(*s != " " || *s != "\n" || *s != "\t"){
@@ -62,7 +64,7 @@ char *get_token(char *line, char **rest){
 		}
 		return s;
 	}
-}
+}*/
 
 /**
  * \brief Esta função faz o parse do input.
@@ -131,10 +133,10 @@ void parse(char *input)
 		{
 			VARIAVEIS(s, letras, token);
 		}
-		/*else if(strcmp(token, """") == 0)
+		else if(token_type == 7)
 		{
-			PUSH_STRING(s, *CREATE_STRING(token));
-		}*/
+			ARRAYS(s, token);
+		}
 	}
 	printStack(s);
 }
