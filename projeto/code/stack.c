@@ -828,7 +828,9 @@ void CREATE_STRING(STACK *s, const char *token){
 
 
 void PUSH_TO_ARRAY(STACK *s, char *str){
-	s->ARRAY->array[s->ARRAY->num++] = str;
+	PUSH_STRING(s, str);
+	DATA x = POP(s);
+	s->array->ARRAY->array[s->array->ARRAY->num++] = x;
 }
 
 
@@ -856,7 +858,18 @@ void BUSCA_POR_INDICE(STACK *s){
 }
 
 
-
+void ARRAYS(STACK *s, const char *token){
+	char *x = strdup(token);
+	long y = *x;
+	switch(y){
+		case 126:
+			COLOCA_ARRAY_STACK(s);
+			break;
+		case 61:
+			BUSCA_POR_INDICE(s);
+			break;
+	}
+}
 
 
 /**
@@ -885,7 +898,7 @@ void printStack(STACK *s)
 			printf(SEP"%s", x.STRING);
 			break;
 		case ARRAY:
-			printStack(STACK );
+			printStack(s->array->ARRAY);
 			break;
 		}
 	}

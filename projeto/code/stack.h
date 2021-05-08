@@ -337,6 +337,8 @@ void COLOCA_ARRAY_STACK(STACK *s);
 
 void BUSCA_POR_INDICE(STACK *s);
 
+void ARRAYS(STACK *s, const char *token);
+
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \

@@ -49,22 +49,72 @@ int verifica_token(char const *token){
 }
 
 
-/*char *get_token(char *line, char **rest){
-	char *s = line;
+char *get_token(char *line, char **rest){
+	char *ret;
 
-	if(*s != " " || *s != "\n" || *s != "\t"){
-		while(*s != " "){
-			s++;
+	if(strcmp(line, " ") != 0 || strcmp(line, "\n") != 0 || strcmp(line, "\t") != 0){
+		line++;
+		while(strcmp(line, " ") != 0 || strcmp(line, "\n") != 0 || strcmp(line, "\t") != 0){
+			*ret = *line;
+			line++;
+			ret++;
 		}
-		return s;
-	}
-	if(*s == " " || *s == "\n" || *s == "\t"){
-		while(*s == " " || *s == "\t" || *s == "\n"){
-			s++;
+		while(*line){
+			**rest = *line;
+			line++;
+			rest++;
 		}
-		return s;
+		return ret;
+	}else if(strcmp(line, " ") == 0 || strcmp(line, "\n") == 0 || strcmp(line, "\t") == 0){
+		line++;
+		while(strcmp(line, " ") == 0 || strcmp(line, "\n") == 0 || strcmp(line, "\t") == 0){
+			*ret = *line;
+			line++;
+			ret++;
+		}
+		while(*line){
+			**rest = *line;
+			line++;
+			rest++;
+		}
+		return ret;
 	}
-}*/
+	return 0;
+}
+
+
+char *get_delimited(char *line, char **rest){
+
+	char *ret;
+	if(strcmp(line, "\"") == 0){
+		line++;
+		while(strcmp(line, "\"") != 0){
+			ret = line;
+			line++;
+			ret++;
+		}
+		while(*line){
+			*rest = line;
+			line++;
+			rest++;
+		}
+		return ret;
+	}else if(strcmp(line, "[") == 0){
+		line++;
+		while(strcmp(line, "]") != 0){
+			ret = line;
+			line++;
+			ret++;
+		}
+		while(*line){
+			*rest = line;
+			line++;
+			rest++;
+		}
+		return ret;
+	}
+	return 0;
+}
 
 /**
  * \brief Esta função faz o parse do input.
@@ -75,13 +125,15 @@ int verifica_token(char const *token){
 void parse(char *input)
 {
 
-	char *delims = " \t\n";
+	//char *delims = " \t\n";
+	char **rest;
 	double a;
 	STACK *s = createStack();
 	STACK *letras = create_letter_array();
 
-	for (char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
+	for (char *token = get_token(input, rest); token != NULL; token = get_token(NULL, rest))
 	{
+		*input = **rest;
 		char *resto;
 		a = strtol(token, &resto, 10);
 
@@ -99,19 +151,32 @@ void parse(char *input)
 		}
 		
 		int token_type = verifica_token(token);
-		if (token_type == 1)
-		{
-			ARITMETICA(s, token);
+
+		switch(token_type){
+			case 1:
+				ARITMETICA(s, token);
+				break;
+			case 2:
+				MAT(s, token);
+				break;
+			case 3:
+				BITWISE(s, token);
+				break;
+			case 4:
+				VARIAVEIS(s, letras, token);
+				break;
+			case 5:
+				COMANDOS_STACK(s, token);
+				break;
+			case 6:
+				LOGICA(s, token);
+				break;
+			case 7:
+				ARRAYS(s, token);
+				break;
 		}
-		else if (token_type == 2)
-		{
-			MAT(s, token);
-		}
-		else if (token_type == 3)
-		{
-			BITWISE(s, token);
-		}
-  		else if (strcmp(token, "l") == 0)
+  		
+  		if (strcmp(token, "l") == 0)
 		{
 			char str[10000];
 			assert(fgets(str, sizeof(str), stdin) != NULL);
@@ -120,22 +185,6 @@ void parse(char *input)
 		else if (strcmp(token, "i") == 0 || strcmp(token, "f") == 0 || strcmp(token, "c") == 0)
 		{
 			CONVERSAO(s, token);
-		}
-		else if(token_type == 5)
-		{
-			COMANDOS_STACK(s, token);
-		}
-		else if(token_type == 6)
-		{
-			LOGICA(s, token);
-		}
-		else if(token_type == 4)
-		{
-			VARIAVEIS(s, letras, token);
-		}
-		else if(token_type == 7)
-		{
-			ARRAYS(s, token);
 		}
 	}
 	printStack(s);
