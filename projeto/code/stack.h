@@ -20,8 +20,9 @@ typedef enum
 	//ARRAY = 16,
 } TYPE;
 
-/** Máscaras */
+/** Máscara de inteiros */
 #define INTEGER (LONG | CHAR)
+/** Máscara de números */
 #define NUMBER (INTEGER | DOUBLE)
 
 /** Tipos de dados da stack */
