@@ -157,14 +157,22 @@ void DIVISAO(STACK *s){
  */
 
 void ARITMETICA(STACK *s, const char *token){
-	if(strcmp(token, "+") == 0){
-		SOMA(s);
-	}else if(strcmp(token, "-") == 0){
-		SUBTRACAO(s);
-	}else if(strcmp(token, "*") == 0){
-		MULTIPLICACAO(s);
-	}else if(strcmp(token, "/") == 0){
-		DIVISAO(s);
+	char *x = strdup(token);
+	long y = *x;
+
+	switch(y){
+		case 43:
+			SOMA(s);
+			break;
+		case 45:
+			SUBTRACAO(s);
+			break;
+		case 42:
+			MULTIPLICACAO(s);
+			break;
+		case 47:
+			DIVISAO(s);
+			break;
 	}
 }
 
@@ -341,12 +349,18 @@ void CONVERTE_CHAR(STACK *s){
  */
 
 void CONVERSAO(STACK *s, const char *token){
-	if(strcmp(token, "i") == 0){
-		CONVERTE_INT(s);
-	}else if(strcmp(token, "f") == 0){
-		CONVERTE_FLOAT(s);
-	}else if(strcmp(token, "c") == 0){
-		CONVERTE_CHAR(s);
+	char *x = strdup(token);
+	long y = *x;
+	switch(y){
+		case 105:
+			CONVERTE_INT(s);
+			break;
+		case 102:
+			CONVERTE_FLOAT(s);
+			break;
+		case 99:
+			CONVERTE_CHAR(s);
+			break;
 	}
 }
 
@@ -821,7 +835,7 @@ void LOGICA(STACK *s, const char *token){
 }
 
 
-void CREATE_STRING(STACK *s, const char *token){
+/*void CREATE_STRING(STACK *s, const char *token){
 	char *tokencpy = strdup(token);
 	PUSH_STRING(s, tokencpy);
 }
@@ -835,6 +849,7 @@ void PUSH_TO_ARRAY(STACK *s, char *str){
 
 
 void CREATE_ARRAY(STACK *s, const char *token){
+	s->array->ARRAY = createStack();
 	char *tokencpy = strdup(token);
 	PUSH_TO_ARRAY(s, tokencpy);
 }
@@ -868,8 +883,11 @@ void ARRAYS(STACK *s, const char *token){
 		case 61:
 			BUSCA_POR_INDICE(s);
 			break;
+		case 91:
+			CREATE_ARRAY(s, token);
+			break;
 	}
-}
+}*/
 
 
 /**
@@ -896,9 +914,6 @@ void printStack(STACK *s)
 			break;
 		case STRING:
 			printf(SEP"%s", x.STRING);
-			break;
-		case ARRAY:
-			printStack(s->array->ARRAY);
 			break;
 		}
 	}
@@ -977,4 +992,4 @@ STACK_OPERATION(long, LONG)
 STACK_OPERATION(double, DOUBLE)
 STACK_OPERATION(char, CHAR)
 STACK_OPERATION(char *, STRING)
-STACK_OPERATION(struct stack *, ARRAY)
+//STACK_OPERATION(struct stack *, ARRAY)

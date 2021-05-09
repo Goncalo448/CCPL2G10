@@ -41,80 +41,13 @@ int verifica_token(char const *token){
 		return 5;
 	}else if(strcmp(token, "=") == 0 || strcmp(token, "<") == 0 || strcmp(token, ">") == 0 || strcmp(token, "!") == 0 || strcmp(token, "e&") == 0 || strcmp(token, "e|") == 0 || strcmp(token, "e<") == 0 || strcmp(token, "e>") == 0 || strcmp(token, "?") == 0){
 		return 6;
-	}else if(strcmp(token, "[") == 0 || strcmp(token, "]") == 0 || strcmp(token, "~") == 0 || strcmp(token, "=") == 0){
+	}else if(strcmp(token, "i") == 0 || strcmp(token, "f") == 0 || strcmp(token, "c") == 0){
 		return 7;
 	}
 
 	return 0;
 }
 
-
-char *get_token(char *line, char **rest){
-	char *ret;
-
-	if(strcmp(line, " ") != 0 || strcmp(line, "\n") != 0 || strcmp(line, "\t") != 0){
-		line++;
-		while(strcmp(line, " ") != 0 || strcmp(line, "\n") != 0 || strcmp(line, "\t") != 0){
-			*ret = *line;
-			line++;
-			ret++;
-		}
-		while(*line){
-			**rest = *line;
-			line++;
-			rest++;
-		}
-		return ret;
-	}else if(strcmp(line, " ") == 0 || strcmp(line, "\n") == 0 || strcmp(line, "\t") == 0){
-		line++;
-		while(strcmp(line, " ") == 0 || strcmp(line, "\n") == 0 || strcmp(line, "\t") == 0){
-			*ret = *line;
-			line++;
-			ret++;
-		}
-		while(*line){
-			**rest = *line;
-			line++;
-			rest++;
-		}
-		return ret;
-	}
-	return 0;
-}
-
-
-char *get_delimited(char *line, char **rest){
-
-	char *ret;
-	if(strcmp(line, "\"") == 0){
-		line++;
-		while(strcmp(line, "\"") != 0){
-			ret = line;
-			line++;
-			ret++;
-		}
-		while(*line){
-			*rest = line;
-			line++;
-			rest++;
-		}
-		return ret;
-	}else if(strcmp(line, "[") == 0){
-		line++;
-		while(strcmp(line, "]") != 0){
-			ret = line;
-			line++;
-			ret++;
-		}
-		while(*line){
-			*rest = line;
-			line++;
-			rest++;
-		}
-		return ret;
-	}
-	return 0;
-}
 
 /**
  * \brief Esta função faz o parse do input.
@@ -125,15 +58,14 @@ char *get_delimited(char *line, char **rest){
 void parse(char *input)
 {
 
-	//char *delims = " \t\n";
-	char **rest;
+	char *delims = " \t\n[]";
+	//char **rest;
 	double a;
 	STACK *s = createStack();
 	STACK *letras = create_letter_array();
 
-	for (char *token = get_token(input, rest); token != NULL; token = get_token(NULL, rest))
+	for (char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
 	{
-		*input = **rest;
 		char *resto;
 		a = strtol(token, &resto, 10);
 
@@ -172,7 +104,7 @@ void parse(char *input)
 				LOGICA(s, token);
 				break;
 			case 7:
-				ARRAYS(s, token);
+				CONVERSAO(s, token);
 				break;
 		}
   		
@@ -181,10 +113,6 @@ void parse(char *input)
 			char str[10000];
 			assert(fgets(str, sizeof(str), stdin) != NULL);
 			PUSH_STRING(s, strdup(str));
-		}
-		else if (strcmp(token, "i") == 0 || strcmp(token, "f") == 0 || strcmp(token, "c") == 0)
-		{
-			CONVERSAO(s, token);
 		}
 	}
 	printStack(s);

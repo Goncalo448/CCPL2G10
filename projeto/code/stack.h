@@ -13,7 +13,7 @@ typedef enum
 	DOUBLE = 4,
 	CHAR = 1,
 	STRING = 8,
-	ARRAY = 16,
+	//ARRAY = 16,
 } TYPE;
 
 
@@ -28,7 +28,7 @@ typedef struct data
 	double DOUBLE;
 	char CHAR;
 	char *STRING;
-	struct stack* ARRAY;
+	//struct stack* ARRAY;
 } DATA;
 
 
@@ -327,7 +327,7 @@ void IF_THEN_ELSE(STACK *s);
 
 void LOGICA(STACK *s, const char *token);
 
-void CREATE_STRING(STACK *s, const char *token);
+/*void CREATE_STRING(STACK *s, const char *token);
 
 void PUSH_TO_ARRAY(STACK *s, char *str);
 
@@ -337,7 +337,7 @@ void COLOCA_ARRAY_STACK(STACK *s);
 
 void BUSCA_POR_INDICE(STACK *s);
 
-void ARRAYS(STACK *s, const char *token);
+void ARRAYS(STACK *s, const char *token);*/
 
 
 #define STACK_OPERATION_PROTO(_type, _name)  \
@@ -348,6 +348,6 @@ STACK_OPERATION_PROTO(long, LONG)
 STACK_OPERATION_PROTO(double, DOUBLE)
 STACK_OPERATION_PROTO(char, CHAR)
 STACK_OPERATION_PROTO(char *, STRING)
-STACK_OPERATION_PROTO(struct stack *, ARRAY)
+//STACK_OPERATION_PROTO(struct stack *, ARRAY)
 
 #endif
