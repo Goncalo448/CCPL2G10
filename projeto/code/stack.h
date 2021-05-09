@@ -6,36 +6,48 @@
 #ifndef __STACK_H__
 #define __STACK_H__
 
- 
+/** Valor atribuído a cada tipo */
 typedef enum
 {
+	/** Inteiro */
 	LONG = 2,
+	/** Decimal */
 	DOUBLE = 4,
+	/** Caractér */
 	CHAR = 1,
+	/** String */
 	STRING = 8,
 	//ARRAY = 16,
 } TYPE;
 
-
+/** Máscaras */
 #define INTEGER (LONG | CHAR)
 #define NUMBER (INTEGER | DOUBLE)
 
-
+/** Tipos de dados da stack */
 typedef struct data
 {
+	/** Tipo */
 	TYPE type;
+	/** Inteiro */
 	long LONG;
+	/** Decimal */
 	double DOUBLE;
+	/** Caractér */
 	char CHAR;
+	/** String */
 	char *STRING;
 	//struct stack* ARRAY;
 } DATA;
 
-
+/** Estrutura da stack */
 typedef struct stack
 {
+	/** Array onde armazena os elementos da stack */
 	DATA *array;
+	/** Tamanho da stack */
 	int size;
+	/** Posição da stack */
 	int num;
 } STACK;
 
@@ -339,7 +351,9 @@ void BUSCA_POR_INDICE(STACK *s);
 
 void ARRAYS(STACK *s, const char *token);*/
 
-
+/**
+ * @brief Macro que executa operações multi tipos
+ */
 #define STACK_OPERATION_PROTO(_type, _name)  \
 	void PUSH_##_name(STACK *s, _type val);  \
 	_type POP_##_name(STACK *s);

@@ -8,10 +8,10 @@
 int verifica_token(char const *token);
 
 
-char *get_token(char *line, char **rest);
+// char *get_token(char *line, char **rest);
 
 
-char *get_delimited(char *line, char **rest);
+// char *get_delimited(char *line, char **rest);
 
 /**
  * \brief Função que faz parse ao input.

@@ -7,6 +7,10 @@
 #include <string.h>
 #include <math.h>
 #include "stack.h"
+/**
+ * @brief Macro que contém o número 10240 como pré definido
+ * 
+ */
 #define limit 10240
 
 /**
@@ -228,14 +232,21 @@ void EXPOENTE(STACK *s){
  */
 
 void MAT(STACK *s, const char *token){
-	if(strcmp(token, "(") == 0){
-		DECREMENT(s);
-	}else if(strcmp(token, ")") == 0){
-		INCREMENT(s);
-	}else if(strcmp(token, "%") == 0){
-		MODULO(s);
-	}else if(strcmp(token, "#") == 0){
-		EXPOENTE(s);
+	char *x = strdup (token);
+	long y = *x;
+	switch (y){
+		case 40:
+			DECREMENT (s);
+			break;
+		case 41:
+			INCREMENT (s);
+			break;
+		case 37:
+			MODULO (s);
+			break;
+		case 35:
+			EXPOENTE (s);
+			break;
 	}
 }
 
@@ -294,14 +305,21 @@ void NOT(STACK *s){
  */
 
 void BITWISE(STACK *s, const char *token){
-	if(strcmp(token, "&")==0){
-		AND(s);
-	} else if(strcmp(token, "|")==0){
-		OR(s);
-	} else if(strcmp(token, "^")==0){
-		XOR(s);
-	} else if(strcmp(token, "~")==0){
-		NOT(s);
+	char *x = strdup (token);
+	long y = *x;
+	switch (y){
+		case 38:
+			AND (s);
+			break;
+		case 124:
+			OR (s);
+			break;
+		case 94:
+			XOR (s);
+			break;
+		case 126:
+			NOT (s);
+			break;
 	}
 }
 
