@@ -245,6 +245,22 @@ void PUSH_PROFUNDIDADE(STACK *s, int x, DATA y);
 STACK *create_letter_array();
 
 /**
+ * \brief PUSH do valor de uma letra para a STACK
+ */
+
+void PUSH_LETRA(STACK *s, STACK *letras, int n);
+
+/**
+ * \brief Função que pega no valor atribuido a uma dada letra e coloca-o na stack principal
+ */
+
+void LETRA(STACK *s, STACK *letras, const char *token);
+
+void ALTERA_LETRA(STACK *s, STACK *letras, int n);
+
+void COLOCA_LETRA(STACK *s, STACK *letras, const char *token);
+
+/**
  * \brief Esta função determina qual a operação que o programa vai executar conforme o token
  */
 

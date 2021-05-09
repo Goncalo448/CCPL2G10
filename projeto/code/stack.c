@@ -435,167 +435,164 @@ STACK *create_letter_array(){
 }
 
 /**
- * \brief Esta função determina qual a operação que o programa vai executar conforme o token
+ * \brief PUSH do valor de uma letra para a STACK
  */
 
-void VARIAVEIS(STACK *s, STACK *letras, const char *token){
+void PUSH_LETRA(STACK *s, STACK *letras, int n){
+	DATA x = letras->array[n];
+	PUSH(s, x);
+}
 
-	if(strcmp(token, "A") == 0){
-		DATA x = letras->array[0];
-		PUSH(s, x);
-	}else if(strcmp(token, "B") == 0){
-		DATA x = letras->array[1];
-		PUSH(s, x);
-	}else if(strcmp(token, "C") == 0){
-		DATA x = letras->array[2];
-		PUSH(s, x);
-	}else if(strcmp(token, "D") == 0){
-		DATA x = letras->array[3];
-		PUSH(s, x);
-	}else if(strcmp(token, "E") == 0){
-		DATA x = letras->array[4];
-		PUSH(s, x);
-	}else if(strcmp(token, "F") == 0){
-		DATA x = letras->array[5];
-		PUSH(s, x);
-	}else if(strcmp(token, "N") == 0){
-		DATA x = letras->array[13];
-		PUSH(s, x);
-	}else if(strcmp(token, "S") == 0){
-		DATA x = letras->array[18];
-		PUSH(s, x);
-	}else if(strcmp(token, "X") == 0){
-		DATA x = letras->array[23];
-		PUSH(s, x);
-	}else if(strcmp(token, "Y") == 0){
-		DATA x = letras->array[24];
-		PUSH(s, x);
-	}else if(strcmp(token, "Z") == 0){
-		DATA x = letras->array[25];
-		PUSH(s, x);
-	}else if(strcmp(token, "G") == 0){
-		DATA x = letras->array[6];
-		PUSH(s, x);
-	}else if(strcmp(token, "H") == 0){
-		DATA x = letras->array[7];
-		PUSH(s, x);
-	}else if(strcmp(token, "I") == 0){
-		DATA x = letras->array[8];
-		PUSH(s, x);
-	}else if(strcmp(token, "J") == 0){
-		DATA x = letras->array[9];
-		PUSH(s, x);
-	}else if(strcmp(token, "K") == 0){
-		DATA x = letras->array[10];
-		PUSH(s, x);
-	}else if(strcmp(token, "L") == 0){
-		DATA x = letras->array[11];
-		PUSH(s, x);
-	}else if(strcmp(token, "M") == 0){
-		DATA x = letras->array[12];
-		PUSH(s, x);
-	}else if(strcmp(token, "O") == 0){
-		DATA x = letras->array[14];
-		PUSH(s, x);
-	}else if(strcmp(token, "P") == 0){
-		DATA x = letras->array[15];
-		PUSH(s, x);
-	}else if(strcmp(token, "Q") == 0){
-		DATA x = letras->array[16];
-		PUSH(s, x);
-	}else if(strcmp(token, "R") == 0){
-		DATA x = letras->array[17];
-		PUSH(s, x);
-	}else if(strcmp(token, "T") == 0){
-		DATA x = letras->array[19];
-		PUSH(s, x);
-	}else if(strcmp(token, "U") == 0){
-		DATA x = letras->array[20];
-		PUSH(s, x);
-	}else if(strcmp(token, "V") == 0){
-		DATA x = letras->array[21];
-		PUSH(s, x);
-	}else if(strcmp(token, "W") == 0){
-		DATA x = letras->array[22];
-		PUSH(s, x);
-	}else if(strcmp(token, ":A") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 0, x);
+/**
+ * \brief Função que pega no valor atribuido a uma dada letra e coloca-o na stack principal
+ */
+
+void LETRA(STACK *s, STACK *letras, const char *token){
+	char *z = strdup(token);
+	char y = *z;
+
+	switch(y){
+		case 'A':
+			PUSH_LETRA(s, letras, 0);
+			break;
+		case 'B':
+			PUSH_LETRA(s, letras, 1);
+			break;
+		case 'C':
+			PUSH_LETRA(s, letras, 2);
+			break;
+		case 'D':
+			PUSH_LETRA(s, letras, 3);
+			break;
+		case 'E':
+			PUSH_LETRA(s, letras, 4);
+			break;
+		case 'F':
+			PUSH_LETRA(s, letras, 5);
+			break;
+		case 'G':
+			PUSH_LETRA(s, letras, 6);
+			break;;
+		case 'H':
+			PUSH_LETRA(s, letras, 7);
+			break;
+		case 'I':
+			PUSH_LETRA(s, letras, 8);
+			break;
+		case 'J':
+			PUSH_LETRA(s, letras, 9);
+			break;
+		case 'K':
+			PUSH_LETRA(s, letras, 10);
+			break;
+		case 'L':
+			PUSH_LETRA(s, letras, 11);
+			break;
+		case 'M':
+			PUSH_LETRA(s, letras, 12);
+			break;
+		case 'N':
+			PUSH_LETRA(s, letras, 13);
+			break;
+		case 'O':
+			PUSH_LETRA(s, letras, 14);
+			break;
+		case 'P':
+			PUSH_LETRA(s, letras, 15);
+			break;
+		case 'Q':
+			PUSH_LETRA(s, letras, 16);
+			break;
+		case 'R':
+			PUSH_LETRA(s, letras, 17);
+			break;
+		case 'S':
+			PUSH_LETRA(s, letras, 18);
+			break;
+		case 'T':
+			PUSH_LETRA(s, letras, 19);
+			break;
+		case 'U':
+			PUSH_LETRA(s, letras, 20);
+			break;
+		case 'V':
+			PUSH_LETRA(s, letras, 21);
+			break;
+		case 'W':
+			PUSH_LETRA(s, letras, 22);
+			break;
+		case 'X':
+			PUSH_LETRA(s, letras, 23);
+			break;
+		case 'Y':
+			PUSH_LETRA(s, letras, 24);
+			break;
+		case 'Z':
+			PUSH_LETRA(s, letras, 25);
+			break;
+	}
+}
+
+
+void ALTERA_LETRA(STACK *s, STACK *letras, int n){
+	DATA x = TOP(s);
+	PUSH_PROFUNDIDADE(letras, n, x);
+}
+
+
+void COLOCA_LETRA(STACK *s, STACK *letras, const char *token){
+	if(strcmp(token, ":A") == 0){
+		ALTERA_LETRA(s, letras, 0);
 	}else if(strcmp(token, ":B") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 1, x);
+		ALTERA_LETRA(s, letras, 1);
 	}else if(strcmp(token, ":C") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 2, x);
+		ALTERA_LETRA(s, letras, 2);
 	}else if(strcmp(token, ":D") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 3, x);
+		ALTERA_LETRA(s, letras, 3);
 	}else if(strcmp(token, ":E") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 4, x);
+		ALTERA_LETRA(s, letras, 4);
 	}else if(strcmp(token, ":F") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 5, x);
+		ALTERA_LETRA(s, letras, 5);
 	}else if(strcmp(token, ":G") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 6, x);
+		ALTERA_LETRA(s, letras, 6);
 	}else if(strcmp(token, ":H") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 7, x);
+		ALTERA_LETRA(s, letras, 7);
 	}else if(strcmp(token, ":I") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 8, x);
+		ALTERA_LETRA(s, letras, 8);
 	}else if(strcmp(token, ":J") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 9, x);
+		ALTERA_LETRA(s, letras, 9);
 	}else if(strcmp(token, ":K") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 10, x);
+		ALTERA_LETRA(s, letras, 10);
 	}else if(strcmp(token, ":L") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 11, x);
+		ALTERA_LETRA(s, letras, 11);
 	}else if(strcmp(token, ":M") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 12, x);
+		ALTERA_LETRA(s, letras, 12);
 	}else if(strcmp(token, ":N") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 13, x);
+		ALTERA_LETRA(s, letras, 13);
 	}else if(strcmp(token, ":O") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 14, x);
+		ALTERA_LETRA(s, letras, 14);
 	}else if(strcmp(token, ":P") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 15, x);
+		ALTERA_LETRA(s, letras, 15);
 	}else if(strcmp(token, ":Q") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 16, x);
+		ALTERA_LETRA(s, letras, 16);
 	}else if(strcmp(token, ":R") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 17, x);
+		ALTERA_LETRA(s, letras, 17);
 	}else if(strcmp(token, ":S") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 18, x);
+		ALTERA_LETRA(s, letras, 18);
 	}else if(strcmp(token, ":T") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 19, x);
+		ALTERA_LETRA(s, letras, 19);
 	}else if(strcmp(token, ":U") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 20, x);
+		ALTERA_LETRA(s, letras, 20);
 	}else if(strcmp(token, ":V") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 21, x);
+		ALTERA_LETRA(s, letras, 21);
 	}else if(strcmp(token, ":W") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 22, x);
+		ALTERA_LETRA(s, letras, 22);
 	}else if(strcmp(token, ":X") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 23, x);
+		ALTERA_LETRA(s, letras, 23);
 	}else if(strcmp(token, ":Y") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 24, x);
+		ALTERA_LETRA(s, letras, 24);
 	}else if(strcmp(token, ":Z") == 0){
-		DATA x = TOP(s);
-		PUSH_PROFUNDIDADE(letras, 25, x);
+		ALTERA_LETRA(s, letras, 25);
 	}
 }
 

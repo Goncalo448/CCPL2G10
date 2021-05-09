@@ -35,7 +35,7 @@ int verifica_token(char const *token){
 		return 2;
 	}else if(strcmp(token, "&") == 0 || strcmp(token, "|") == 0 || strcmp(token, "^") == 0 || strcmp(token, "~") == 0){
 		return 3;
-	}else if(strcmp(token, "A") == 0 || strcmp(token, "B") == 0 || strcmp(token, "C") == 0 || strcmp(token, "D") == 0 || strcmp(token, "E") == 0 || strcmp(token, "F") == 0 || strcmp(token, "G") == 0 || strcmp(token, "H") == 0 || strcmp(token, "I") == 0 || strcmp(token, "J") == 0 || strcmp(token, "K") == 0 || strcmp(token, "L") == 0 || strcmp(token, "M") == 0 || strcmp(token, "N") == 0 || strcmp(token, "O") == 0 || strcmp(token, "P") == 0 || strcmp(token, "Q") == 0 || strcmp(token, "R") == 0 || strcmp(token, "S") == 0 || strcmp(token, "T") == 0 || strcmp(token, "U") == 0 || strcmp(token, "V") == 0 || strcmp(token, "W") == 0 || strcmp(token, "X") == 0 || strcmp(token, "Y") == 0 || strcmp(token, "Z") == 0 || strcmp(token, ":A") == 0 || strcmp(token, ":B") == 0 || strcmp(token, ":C") == 0 || strcmp(token, ":D") == 0 || strcmp(token, ":E") == 0 || strcmp(token, ":F") == 0 || strcmp(token, ":G") == 0 || strcmp(token, ":H") == 0 || strcmp(token, ":I") == 0 || strcmp(token, ":J") == 0 || strcmp(token, ":K") == 0 || strcmp(token, ":L") == 0 || strcmp(token, ":M") == 0 || strcmp(token, ":N") == 0 || strcmp(token, ":O") == 0 || strcmp(token, ":P") == 0 || strcmp(token, ":Q") == 0 || strcmp(token, ":R") == 0 || strcmp(token, ":S") == 0 || strcmp(token, ":T") == 0 || strcmp(token, ":U") == 0 || strcmp(token, ":V") == 0 || strcmp(token, ":W") == 0 || strcmp(token, ":X") == 0 || strcmp(token, ":Y") == 0 || strcmp(token, ":Z") == 0){
+	}else if(strcmp(token, "A") == 0 || strcmp(token, "B") == 0 || strcmp(token, "C") == 0 || strcmp(token, "D") == 0 || strcmp(token, "E") == 0 || strcmp(token, "F") == 0 || strcmp(token, "G") == 0 || strcmp(token, "H") == 0 || strcmp(token, "I") == 0 || strcmp(token, "J") == 0 || strcmp(token, "K") == 0 || strcmp(token, "L") == 0 || strcmp(token, "M") == 0 || strcmp(token, "N") == 0 || strcmp(token, "O") == 0 || strcmp(token, "P") == 0 || strcmp(token, "Q") == 0 || strcmp(token, "R") == 0 || strcmp(token, "S") == 0 || strcmp(token, "T") == 0 || strcmp(token, "U") == 0 || strcmp(token, "V") == 0 || strcmp(token, "W") == 0 || strcmp(token, "X") == 0 || strcmp(token, "Y") == 0 || strcmp(token, "Z") == 0){
 		return 4;
 	}else if(strcmp(token, "_") == 0 || strcmp(token, ";") == 0 || strcmp(token, "\\") == 0 || strcmp(token, "@") == 0 || strcmp(token, "$") == 0){
 		return 5;
@@ -43,6 +43,8 @@ int verifica_token(char const *token){
 		return 6;
 	}else if(strcmp(token, "i") == 0 || strcmp(token, "f") == 0 || strcmp(token, "c") == 0){
 		return 7;
+	}else if(strcmp(token, ":A") == 0 || strcmp(token, ":B") == 0 || strcmp(token, ":C") == 0 || strcmp(token, ":D") == 0 || strcmp(token, ":E") == 0 || strcmp(token, ":F") == 0 || strcmp(token, ":G") == 0 || strcmp(token, ":H") == 0 || strcmp(token, ":I") == 0 || strcmp(token, ":J") == 0 || strcmp(token, ":K") == 0 || strcmp(token, ":L") == 0 || strcmp(token, ":M") == 0 || strcmp(token, ":N") == 0 || strcmp(token, ":O") == 0 || strcmp(token, ":P") == 0 || strcmp(token, ":Q") == 0 || strcmp(token, ":R") == 0 || strcmp(token, ":S") == 0 || strcmp(token, ":T") == 0 || strcmp(token, ":U") == 0 || strcmp(token, ":V") == 0 || strcmp(token, ":W") == 0 || strcmp(token, ":X") == 0 || strcmp(token, ":Y") == 0 || strcmp(token, ":Z") == 0){
+		return 8;
 	}
 
 	return 0;
@@ -95,7 +97,7 @@ void parse(char *input)
 				BITWISE(s, token);
 				break;
 			case 4:
-				VARIAVEIS(s, letras, token);
+				LETRA(s, letras, token);
 				break;
 			case 5:
 				COMANDOS_STACK(s, token);
@@ -105,6 +107,9 @@ void parse(char *input)
 				break;
 			case 7:
 				CONVERSAO(s, token);
+				break;
+			case 8:
+				COLOCA_LETRA(s, letras, token);
 				break;
 		}
   		
